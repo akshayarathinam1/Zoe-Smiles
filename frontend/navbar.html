@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zoe Smiles – Navbar</title>
+    <meta name="description" content="Zoe Smiles dental clinic navigation bar component." />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind CSS CDN (used for layout utilities) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: { sans: ["Inter", "sans-serif"] },
+            colors: {
+              brand: {
+                DEFAULT: "#006576",
+                dark:    "#00515e",
+                light:   "#edf6f8",
+              },
+            },
+          },
+        },
+      };
+    </script>
+
+    <!-- External Stylesheet -->
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
+
+  <body>
+
+    <!-- ===== NAVBAR ===== -->
+    <header class="navbar" id="site-navbar">
+      <nav class="navbar__inner">
+
+        <!-- Top row: logo | links | cta | hamburger -->
+        <div class="navbar__row">
+
+          <!-- Logo -->
+          <a href="#" id="logo-link" class="navbar__logo-link">
+            <img
+              src="assets/logo/logo_zoesmiles.png"
+              alt="Zoe Smiles Dental Clinic Logo"
+              class="navbar__logo-img"
+            />
+          </a>
+
+          <!-- Desktop Nav Links -->
+          <ul class="navbar__links" id="desktop-nav">
+            <li>
+              <a href="#" id="nav-home"     class="nav-link active">Home</a>
+            </li>
+            <li>
+              <a href="#" id="nav-about"    class="nav-link">About</a>
+            </li>
+            <li>
+              <a href="#" id="nav-services" class="nav-link">Services</a>
+            </li>
+            <li>
+              <a href="#smilegallery" id="nav-smilegallery" class="nav-link">Smile Gallery</a>
+            </li>
+            <li>
+              <a href="#contact" id="nav-contact" class="nav-link">Contact</a>
+            </li>
+          </ul>
+
+
+
+          <!-- Hamburger — Mobile -->
+          <button
+            id="hamburger-btn"
+            class="hamburger"
+            aria-label="Toggle navigation menu"
+            aria-expanded="false"
+            aria-controls="mobile-menu"
+          >
+            <span class="hamburger__bar"></span>
+            <span class="hamburger__bar"></span>
+            <span class="hamburger__bar"></span>
+          </button>
+
+        </div><!-- /navbar__row -->
+
+        <!-- Mobile Dropdown Menu -->
+        <div
+          id="mobile-menu"
+          class="mobile-menu"
+          role="navigation"
+          aria-label="Mobile navigation"
+        >
+          <ul class="mobile-menu__list">
+            <li><a href="#" id="mob-home"     class="mobile-menu__link">Home</a></li>
+            <li><a href="#" id="mob-about"    class="mobile-menu__link">About</a></li>
+            <li><a href="#" id="mob-services" class="mobile-menu__link">Services</a></li>
+            <li><a href="#smilegallery" id="mob-smilegallery" class="mobile-menu__link">Smile Gallery</a></li>
+            <li><a href="#contact" id="mob-contact" class="mobile-menu__link">Contact</a></li>
+          </ul>
+        </div><!-- /mobile-menu -->
+
+      </nav>
+    </header>
+    <!-- ===== END NAVBAR ===== -->
+
+
+    <!-- ===== Demo page content ===== -->
+    <main>
+      <section class="page-hero">
+        <h1 class="page-hero__title">Welcome to Zoe Smiles</h1>
+        <p class="page-hero__sub">
+          Your trusted dental care partner. Resize the window to see the
+          responsive mobile navbar.
+        </p>
+      </section>
+    </main>
+
+
+    <!-- ===== JavaScript ===== -->
+    <script>
+      /* ── Hamburger Toggle ── */
+      const hamburgerBtn = document.getElementById("hamburger-btn");
+      const mobileMenu   = document.getElementById("mobile-menu");
+
+      hamburgerBtn.addEventListener("click", () => {
+        const isOpen = mobileMenu.classList.toggle("is-open");
+        hamburgerBtn.classList.toggle("is-open", isOpen);
+        hamburgerBtn.setAttribute("aria-expanded", String(isOpen));
+      });
+
+      /* Close mobile menu on link click */
+      mobileMenu.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          mobileMenu.classList.remove("is-open");
+          hamburgerBtn.classList.remove("is-open");
+          hamburgerBtn.setAttribute("aria-expanded", "false");
+        });
+      });
+
+      /* ── Active Nav Link ── */
+      const navLinks = document.querySelectorAll("#desktop-nav .nav-link");
+
+      navLinks.forEach((link) => {
+        link.addEventListener("click", (e) => {
+          e.preventDefault();
+          navLinks.forEach((l) => l.classList.remove("active"));
+          link.classList.add("active");
+        });
+      });
+
+      /* ── Scroll Shadow ── */
+      const navbar = document.getElementById("site-navbar");
+
+      window.addEventListener("scroll", () => {
+        navbar.classList.toggle("navbar--scrolled", window.scrollY > 10);
+      }, { passive: true });
+    </script>
+
+  </body>
+</html>

@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zoe Smiles Dental Clinic — Professional & Caring Dental Services</title>
+    <meta name="description" content="Welcome to Zoe Smiles Dental Clinic. We provide high-quality, comfortable dental care including general, cosmetic, and restorative dentistry. Book your appointment today." />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind CSS CDN (used for grid layout, spacing, and utilities) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+              display: ["Outfit", "sans-serif"],
+            },
+            colors: {
+              brand: {
+                DEFAULT: "#006576",
+                dark:    "#00515e",
+                light:   "#edf6f8",
+                accent:  "#f59e0b", /* Warm gold accent */
+              },
+            },
+          },
+        },
+      };
+    </script>
+
+    <!-- External Stylesheet -->
+    <link rel="stylesheet" href="assets/css/style.css" />
+
+  </head>
+
+  <body class="font-sans bg-white text-gray-800">
+
+    <!-- ===== PREMIUM TOP BAR ===== -->
+    <div class="premium-topbar" id="premium-topbar">
+      <p class="premium-topbar__text">
+        <span class="premium-topbar__dot"></span>
+        Now accepting new patients &mdash; Book your consultation today!
+        <a href="#home" class="premium-topbar__cta">Book Now &rarr;</a>
+      </p>
+    </div>
+
+    <!-- ===== NAVBAR ===== -->
+    <header class="navbar" id="site-navbar">
+      <nav class="navbar__inner">
+
+        <!-- Top row: logo | links | cta | hamburger -->
+        <div class="navbar__row">
+
+          <!-- Logo -->
+          <a href="index.html" id="logo-link" class="navbar__logo-link">
+            <img
+              src="assets/logo/logo_zoesmiles.png"
+              alt="Zoe Smiles Dental Clinic Logo"
+              class="navbar__logo-img"
+            />
+          </a>
+
+          <!-- Desktop Nav Links -->
+          <ul class="navbar__links" id="desktop-nav">
+            <li>
+              <a href="#home" id="nav-home" class="nav-link active">Home</a>
+            </li>
+            <li>
+              <a href="#about" id="nav-about" class="nav-link">About</a>
+            </li>
+            <li>
+              <a href="#services" id="nav-services" class="nav-link">Services</a>
+            </li>
+            <li>
+              <a href="#smilegallery" id="nav-smilegallery" class="nav-link">Smile Gallery</a>
+            </li>
+            <li>
+              <a href="#contact" id="nav-contact" class="nav-link">Contact</a>
+            </li>
+          </ul>
+
+
+
+          <!-- Hamburger — Mobile -->
+          <button
+            id="hamburger-btn"
+            class="hamburger"
+            aria-label="Toggle navigation menu"
+            aria-expanded="false"
+            aria-controls="mobile-menu"
+          >
+            <span class="hamburger__bar"></span>
+            <span class="hamburger__bar"></span>
+            <span class="hamburger__bar"></span>
+          </button>
+
+        </div><!-- /navbar__row -->
+
+        <!-- Mobile Dropdown Menu -->
+        <div
+          id="mobile-menu"
+          class="mobile-menu"
+          role="navigation"
+          aria-label="Mobile navigation"
+        >
+          <ul class="mobile-menu__list">
+            <li><a href="#home" id="mob-home" class="mobile-menu__link">Home</a></li>
+            <li><a href="#about" id="mob-about" class="mobile-menu__link">About</a></li>
+            <li><a href="#services" id="mob-services" class="mobile-menu__link">Services</a></li>
+            <li><a href="#smilegallery" id="mob-smilegallery" class="mobile-menu__link">Smile Gallery</a></li>
+            <li><a href="#contact" id="mob-contact" class="mobile-menu__link">Contact</a></li>
+          </ul>
+        </div><!-- /mobile-menu -->
+
+      </nav>
+    </header>
+    <!-- ===== END NAVBAR ===== -->
+
+    <!-- ===== HERO SECTION ===== -->
+    <main>
+      <section id="home" class="hero-section">
+
+        <!-- Background image (real <img> tag) -->
+        <img
+          src="assets/homepage/hero-bg.jpg"
+          alt="Modern Zoe Smiles dental clinic interior"
+          class="hero-section__bg"
+          loading="eager"
+        />
+
+        <!-- Subtle light overlay for text legibility -->
+        <div class="hero-section__overlay"></div>
+
+        <!-- Content -->
+        <div class="hero-section__content">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-20 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+
+            <!-- ── Left: Headline + CTAs ── -->
+            <div class="lg:col-span-6 xl:col-span-7">
+
+              <!-- Badge -->
+              <div class="hero-badge">
+                <span class="hero-badge__dot"></span>
+                Elite Dental Care
+              </div>
+
+              <h1 class="hero-headline">
+                Precision Care<br/>
+                for Your <span>Perfect<br/>Smile</span>
+              </h1>
+
+              <p class="hero-desc">
+                Experience the pinnacle of clinical excellence with advanced
+                dental technology and a patient-first approach. At Zoe Smiles
+                Multispeciality Dental Clinic, we create healthy, confident
+                smiles designed to last a lifetime.
+              </p>
+            </div>
+
+            <!-- ── Right: Quick Appointment Card ── -->
+            <div class="lg:col-span-6 xl:col-span-5">
+              <div class="hero-appt-card">
+                <h3 class="hero-appt-card__title">Book Your Appointment</h3>
+
+                <form id="hero-appt-form">
+
+                  <div class="appt-field">
+                    <label class="appt-label" for="h-name">Full Name</label>
+                    <input
+                      type="text"
+                      id="h-name"
+                      name="name"
+                      class="appt-input"
+                      placeholder="Enter your full name"
+                      required
+                    />
+                  </div>
+
+                  <div class="appt-field">
+                    <label class="appt-label" for="h-phone">Phone Number</label>
+                    <input
+                      type="tel"
+                      id="h-phone"
+                      name="phone"
+                      class="appt-input"
+                      placeholder="e.g. +1 (555) 000-0000"
+                      required
+                    />
+                  </div>
+
+                  <div class="appt-field">
+                    <label class="appt-label" for="h-date">Preferred Date</label>
+                    <input
+                      type="date"
+                      id="h-date"
+                      name="date"
+                      class="appt-input"
+                      required
+                    />
+                  </div>
+
+                  <div class="appt-field">
+                    <label class="appt-label" for="h-time">Preferred Time</label>
+                    <select id="h-time" name="time" class="appt-input" required>
+                      <option value="">-- Select a time --</option>
+                      <option>09:00 AM</option>
+                      <option>10:00 AM</option>
+                      <option>11:00 AM</option>
+                      <option>12:00 PM</option>
+                      <option>01:00 PM</option>
+                      <option>02:00 PM</option>
+                      <option>03:00 PM</option>
+                      <option>04:00 PM</option>
+                      <option>05:00 PM</option>
+                      <option>06:00 PM</option>
+                    </select>
+                  </div>
+
+                  <button type="submit" id="hero-appt-submit" class="btn-appt-submit">
+                    Confirm Appointment
+                  </button>
+                </form>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ===== ABOUT US SECTION ===== -->
+      <section id="about" class="about-section">
+        <div class="about-section__bg-accent" aria-hidden="true"></div>
+        <div class="about-section__inner">
+
+          <!-- ── Left: Doctor Image ── -->
+          <div class="about-img-col reveal" id="about-image-col">
+            <div class="about-img-wrap">
+              <!-- Dual Tooth Image -->
+              <img
+                src="assets/about/Dual Tooth Image.png"
+                alt="Dual tooth model showcasing dental care at Zoe Smiles Clinic"
+                class="about-img"
+                loading="lazy"
+              />
+            </div>
+          </div>
+
+          <!-- ── Right: Content ── -->
+          <div class="about-content-col reveal reveal-delay-2" id="about-content-col">
+
+            <!-- WHO WE ARE label -->
+            <p class="about-eyebrow">WHO WE ARE</p>
+
+            <h2 class="about-heading">
+              Modern dentistry with<br>
+              <span class="about-heading__accent">gentle care</span>
+            </h2>
+
+            <p class="about-desc">
+              At Zoe Smiles Multispeciality Dental Clinic, we believe every smile tells a story. Our mission is to provide advanced, affordable, and compassionate dental care that helps patients smile with confidence and comfort.
+            </p>
+
+            <!-- Feature list -->
+            <ul class="about-features" id="about-feature-list">
+              <li class="about-feature-item">
+                <span class="about-feature-check" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd"/></svg>
+                </span>
+                Experienced Specialists
+              </li>
+              <li class="about-feature-item">
+                <span class="about-feature-check" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd"/></svg>
+                </span>
+                Modern Equipments
+              </li>
+              <li class="about-feature-item">
+                <span class="about-feature-check" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd"/></svg>
+                </span>
+                Personalized Care
+              </li>
+              <li class="about-feature-item">
+                <span class="about-feature-check" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd"/></svg>
+                </span>
+                Comfortable Environment
+              </li>
+            </ul>
+
+            <a href="#services" id="about-learn-more" class="about-btn">
+              Learn More
+            </a>
+
+          </div>
+        </div>
+      </section>
+      <!-- ===== END ABOUT US SECTION ===== -->
+
+      <!-- ===== SERVICES ===== -->
+      <section id="services" class="svc-section">
+        <div class="svc-inner">
+
+          <!-- Section Header -->
+          <div class="svc-header reveal">
+            <div class="svc-eyebrow">
+              <!-- Tooth icon -->
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="svc-eyebrow__icon" aria-hidden="true">
+                <path d="M12 2C9.5 2 7 3.5 6 5.5 5 7.5 5 10 6 12c.5 1 1 3 1 5 0 1.1.9 2 2 2h.5c.8 0 1.5-.6 1.5-1.5V17c0-.6.4-1 1-1s1 .4 1 1v.5c0 .9.7 1.5 1.5 1.5H15c1.1 0 2-.9 2-2 0-2 .5-4 1-5 1-2 1-4.5 0-6.5C17 3.5 14.5 2 12 2z"/>
+              </svg>
+              WHY CHOOSE US
+            </div>
+            <h2 class="svc-heading">Our Services</h2>
+          </div>
+
+          <!-- Services Grid -->
+          <div class="svc-grid">
+
+            <!-- 1. Dental Implants -->
+            <div class="svc-card reveal reveal-delay-1" id="svc-implants">
+              <div class="svc-icon-wrap">
+                <!-- Tooth icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M12 2C9.5 2 7 3.5 6 5.5 5 7.5 5 10 6 12c.5 1 1 3 1 5 0 1.1.9 2 2 2h.5c.8 0 1.5-.6 1.5-1.5V17c0-.6.4-1 1-1s1 .4 1 1v.5c0 .9.7 1.5 1.5 1.5H15c1.1 0 2-.9 2-2 0-2 .5-4 1-5 1-2 1-4.5 0-6.5C17 3.5 14.5 2 12 2z"/>
+                </svg>
+              </div>
+              <h4 class="svc-card__title">Dental Implants</h4>
+              <p class="svc-card__desc">Restore missing teeth permanently with natural-looking, durable dental implants that improve confidence, speech, and chewing ability.</p>
+            </div>
+
+            <!-- 2. Smile Designing -->
+            <div class="svc-card reveal reveal-delay-2" id="svc-smile">
+              <div class="svc-icon-wrap">
+                <!-- Sparkles / Star icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M9 4.5a.75.75 0 0 1 .721.544l.813 2.846a3.75 3.75 0 0 0 2.576 2.576l2.846.813a.75.75 0 0 1 0 1.442l-2.846.813a3.75 3.75 0 0 0-2.576 2.576l-.813 2.846a.75.75 0 0 1-1.442 0l-.813-2.846a3.75 3.75 0 0 0-2.576-2.576l-2.846-.813a.75.75 0 0 1 0-1.442l2.846-.813A3.75 3.75 0 0 0 7.466 7.89l.813-2.846A.75.75 0 0 1 9 4.5Zm9-3a.75.75 0 0 1 .728.568l.258 1.036a2.25 2.25 0 0 0 1.91 1.91l1.036.258a.75.75 0 0 1 0 1.456l-1.036.258a2.25 2.25 0 0 0-1.91 1.91l-.258 1.036a.75.75 0 0 1-1.456 0l-.258-1.036a2.25 2.25 0 0 0-1.91-1.91l-1.036-.258a.75.75 0 0 1 0-1.456l1.036-.258a2.25 2.25 0 0 0 1.91-1.91l.258-1.036A.75.75 0 0 1 18 1.5Z" clip-rule="evenodd"/>
+                </svg>
+              </div>
+              <h4 class="svc-card__title">Smile Designing</h4>
+              <p class="svc-card__desc">Transform your smile with customized cosmetic dental treatments including veneers, whitening, and complete smile makeovers.</p>
+            </div>
+
+            <!-- 3. Root Canal Treatment -->
+            <div class="svc-card reveal reveal-delay-3" id="svc-rootcanal">
+              <div class="svc-icon-wrap">
+                <!-- Shield / Protection check -->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M12.516 2.17a.75.75 0 0 0-1.032 0 11.209 11.209 0 0 1-7.877 3.08.75.75 0 0 0-.722.515A12.74 12.74 0 0 0 2.25 9.75c0 5.942 4.064 10.933 9.563 12.348a.749.749 0 0 0 .374 0c5.499-1.415 9.563-6.406 9.563-12.348 0-1.39-.223-2.73-.635-3.985a.75.75 0 0 0-.722-.516l-.143.001c-2.996 0-5.717-1.17-7.734-3.08Zm3.094 8.016a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z" clip-rule="evenodd"/>
+                </svg>
+              </div>
+              <h4 class="svc-card__title">Root Canal Treatment</h4>
+              <p class="svc-card__desc">Save damaged or infected teeth with painless root canal procedures that preserve your natural tooth structure.</p>
+            </div>
+
+            <!-- 4. Crown & Bridge -->
+            <div class="svc-card reveal reveal-delay-4" id="svc-crown">
+              <div class="svc-icon-wrap">
+                <!-- Crown / Arch icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M2 19h20v2H2v-2zm1-8h3v6H3v-6zm15 0h3v6h-3v-6zM8 5h8v2H8V5zM7 9h10v6H7V9zm-3.5 0h3v1H3.5V9zm14 0h3v1h-3V9z"/>
+                </svg>
+              </div>
+              <h4 class="svc-card__title">Crown &amp; Bridge</h4>
+              <p class="svc-card__desc">Repair damaged or missing teeth with strong, comfortable, and natural-looking crowns and bridges.</p>
+            </div>
+
+            <!-- 5. Orthodontic Treatment -->
+            <div class="svc-card" id="svc-ortho">
+              <div class="svc-icon-wrap">
+                <!-- Alignment / Check circles -->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm-1.72 6.97a.75.75 0 1 0-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 1 0 1.06 1.06L12 13.06l1.72 1.72a.75.75 0 1 0 1.06-1.06L13.06 12l1.72-1.72a.75.75 0 1 0-1.06-1.06L12 10.94l-1.72-1.72Z" clip-rule="evenodd"/>
+                </svg>
+              </div>
+              <h4 class="svc-card__title">Orthodontic Treatment</h4>
+              <p class="svc-card__desc">Correct misaligned teeth and bite issues with modern braces and orthodontic solutions for all ages.</p>
+            </div>
+
+            <!-- 6. Complete Denture -->
+            <div class="svc-card" id="svc-denture">
+              <div class="svc-icon-wrap">
+                <!-- Happy smile/mouth teeth -->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M12 2.25a.75.75 0 0 1 .75.75v.756a8.25 8.25 0 0 1 7.162 7.842.75.75 0 0 1-1.5 0c0-3.328-2.316-6.116-5.412-6.804V6.5a.75.75 0 0 1-1.5 0V4.748c-3.096.688-5.412 3.476-5.412 6.804a.75.75 0 0 1-1.5 0A8.25 8.25 0 0 1 11.25 3.756V3a.75.75 0 0 1 .75-.75Zm0 12.75a3.75 3.75 0 0 0 3.75-3.75v-.75a.75.75 0 0 1 1.5 0v.75a5.25 5.25 0 0 1-10.5 0v-.75a.75.75 0 0 1 1.5 0v.75A3.75 3.75 0 0 0 12 15Z" clip-rule="evenodd"/>
+                </svg>
+              </div>
+              <h4 class="svc-card__title">Complete Denture</h4>
+              <p class="svc-card__desc">Restore your smile and facial appearance with comfortable, natural-looking full dentures.</p>
+            </div>
+
+            <!-- 7. Scaling & Cleaning -->
+            <div class="svc-card" id="svc-scaling">
+              <div class="svc-icon-wrap">
+                <!-- Cleaning Sparkles + Droplet -->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10.83 5.141a10.5 10.5 0 0 0-4.04 4.04c-.31.537-.96.79-1.536.529a1.5 1.5 0 0 1-.806-1.944 13.5 13.5 0 0 1 5.195-5.195 1.5 1.5 0 0 1 1.944.806c.261.576.008 1.226-.529 1.536Zm5.44 11.968a10.5 10.5 0 0 0 4.04-4.04c.31-.537.96-.79 1.536-.529a1.5 1.5 0 0 1 .806 1.944 13.5 13.5 0 0 1-5.195 5.195 1.5 1.5 0 0 1-1.944-.806c-.261-.576-.008-1.226.529-1.536ZM12 7.5a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9Z" clip-rule="evenodd"/>
+                </svg>
+              </div>
+              <h4 class="svc-card__title">Scaling &amp; Cleaning</h4>
+              <p class="svc-card__desc">Maintain healthy teeth and gums with professional cleaning and plaque removal treatments.</p>
+            </div>
+
+            <!-- 8. Gum Surgery -->
+            <div class="svc-card" id="svc-gumsurg">
+              <div class="svc-icon-wrap">
+                <!-- Heart / Safety Shield -->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z"/>
+                </svg>
+              </div>
+              <h4 class="svc-card__title">Gum Surgery</h4>
+              <p class="svc-card__desc">Protect your oral health with advanced gum disease treatments and periodontal surgical care.</p>
+            </div>
+
+            <!-- 9. Minor Oral Surgeries -->
+            <div class="svc-card" id="svc-minorsurg">
+              <div class="svc-icon-wrap">
+                <!-- Scissors / Tools / Hospital cross -->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M7.502 6h7.128A3.375 3.375 0 0 1 18 9.375v9.375a3 3 0 0 0 3-3V6.108c0-1.505-1.125-2.811-2.664-2.94a48.972 48.972 0 0 0-.673-.05A3 3 0 0 0 15 1.5h-1.5a3 3 0 0 0-2.663 1.618c-.225.015-.45.032-.673.05C8.662 3.295 7.554 4.542 7.502 6ZM13.5 3A1.5 1.5 0 0 0 12 4.5h4.5A1.5 1.5 0 0 0 15 3h-1.5Z" clip-rule="evenodd"/>
+                  <path fill-rule="evenodd" d="M3 9.375C3 8.339 3.84 7.5 4.875 7.5h9.75c1.036 0 1.875.84 1.875 1.875v11.25c0 1.035-.84 1.875-1.875 1.875h-9.75A1.875 1.875 0 0 1 3 20.625V9.375Zm9.586 4.594a.75.75 0 0 0-1.172-.938l-2.476 3.096-.908-.907a.75.75 0 0 0-1.06 1.06l1.5 1.5a.75.75 0 0 0 1.116-.062l3-3.75Z" clip-rule="evenodd"/>
+                </svg>
+              </div>
+              <h4 class="svc-card__title">Minor Oral Surgeries</h4>
+              <p class="svc-card__desc">Experience safe and comfortable minor oral surgical procedures including tooth extractions and dental surgeries.</p>
+            </div>
+
+            <!-- 10. Ear Lobe Repair -->
+            <div class="svc-card" id="svc-earlobe">
+              <div class="svc-icon-wrap">
+                <!-- Aesthetic / Sparkle needle or loop -->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M12 6.75a5.25 5.25 0 0 1 6.775-5.025.75.75 0 0 1 .313 1.248l-3.32 3.319c.063.475.276.934.641 1.299.365.365.824.578 1.3.641l3.318-3.319a.75.75 0 0 1 1.248.313 5.25 5.25 0 0 1-5.472 6.756c-1.018-.086-1.87.1-2.309.634L7.344 21.3A3.298 3.298 0 1 1 2.7 16.657l8.684-7.151c.533-.44.72-1.291.634-2.309A5.342 5.342 0 0 1 12 6.75ZM4.117 19.125a.75.75 0 0 1 .75-.75h.008a.75.75 0 0 1 .75.75v.008a.75.75 0 0 1-.75.75h-.008a.75.75 0 0 1-.75-.75v-.008Z" clip-rule="evenodd"/>
+                </svg>
+              </div>
+              <h4 class="svc-card__title">Ear Lobe Repair</h4>
+              <p class="svc-card__desc">Restore torn or damaged ear lobes with professional aesthetic ear lobe repair procedures.</p>
+            </div>
+
+          </div><!-- /svc-grid -->
+
+          <!-- CTA Button -->
+          <div class="svc-cta-wrap">
+            <a href="#contact" id="svc-view-all" class="svc-cta-btn">View All Services</a>
+          </div>
+
+
+        </div>
+      </section>
+
+
+      <!-- ===== TESTIMONIALS SECTION ===== -->
+      <section id="testimonials" class="testi-section">
+        <!-- Background overlay -->
+        <div class="testi-overlay"></div>
+
+        <div class="testi-inner relative group">
+          <!-- Heading -->
+          <h2 class="testi-heading">What People Say</h2>
+
+          <!-- Arrows -->
+          <button class="testi-arrow testi-prev" aria-label="Previous">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          <button class="testi-arrow testi-next" aria-label="Next">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+
+          <!-- 3-column grid -->
+          <div class="testi-grid">
+
+            <!-- Card 1 -->
+            <div class="testi-card">
+              <p class="testi-quote">Lorem ipsum dolor sit amet, consecng elit. Praesent vestibulum molestie lacus. Aenean nonu hen aurisllus porta. Fusce suscipit varius mi.</p>
+              <div class="testi-author">
+                <img src="assets/avatar_gregory.png" alt="Gregory Bowman" class="testi-avatar" />
+                <span class="testi-name">Gregory Bowman</span>
+              </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="testi-card">
+              <p class="testi-quote">The friendly atmosphere and state of the art interior makes you relax. I have had a dental phobia most of my life, but it's gone after just one visit here!</p>
+              <div class="testi-author">
+                <img src="assets/avatar_helen.png" alt="Helen Smith" class="testi-avatar" />
+                <span class="testi-name">Helen Smith</span>
+              </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="testi-card">
+              <p class="testi-quote">After visiting a number of dentists over the years, I have finally found one who I trust, without a doubt the most caring and professional staff.</p>
+              <div class="testi-author">
+                <img src="assets/avatar_gregory.png" alt="Gregory Bowman" class="testi-avatar" />
+                <span class="testi-name">Gregory Bowman</span>
+              </div>
+            </div>
+
+          </div><!-- /testi-grid -->
+        </div><!-- /testi-inner -->
+      </section>
+
+      <!-- ===== CONTACT SECTION ===== -->
+      <section id="contact" class="contact-section">
+        <div class="contact-container">
+          
+          <!-- Header -->
+          <div class="contact-header">
+            <span class="contact-subtitle">GET IN TOUCH</span>
+            <h2 class="contact-title">Contact Our Clinic</h2>
+            <div class="contact-divider"></div>
+          </div>
+
+          <!-- Content Grid -->
+          <div class="contact-grid">
+            
+            <!-- Left: Form Card -->
+            <div class="contact-form-card">
+              <form id="contact-form" class="contact-form">
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" name="fullName" placeholder="John Doe" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="emailAddr">Email Address</label>
+                    <input type="email" id="emailAddr" name="emailAddr" placeholder="john@example.com" required>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="phoneNum">Phone Number</label>
+                  <input type="tel" id="phoneNum" name="phoneNum" placeholder="+1 (555) 000-0000" required>
+                </div>
+                <div class="form-group">
+                  <label for="messageText">Message</label>
+                  <textarea id="messageText" name="messageText" rows="4" placeholder="How can we help you?" required></textarea>
+                </div>
+                <button type="submit" id="contact-submit" class="submit-btn">Send Message</button>
+              </form>
+            </div>
+
+            <!-- Right: Map -->
+            <div class="contact-map-container">
+              <!-- Google Maps embed for Chennai -->
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d124415.7196614488!2d80.12648719001389!3d13.083434604928004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a5265ea4f7d3361%3A0x6e61a70b6863d433!2sChennai%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1708833000000!5m2!1sen!2sin" 
+                width="100%" 
+                height="100%" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
+              </iframe>
+
+              <!-- Floating Location Card -->
+              <div class="map-floating-card">
+                <div class="location-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+                  </svg>
+                </div>
+                <div class="location-details">
+                  <h4>Our Location</h4>
+                  <p>123 Mount Road, Anna Salai<br>Chennai, TN 600002</p>
+                </div>
+              </div>
+            </div>
+
+          </div><!-- /contact-grid -->
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ===== TOAST NOTIFICATION ===== -->
+    <div id="toast-container" class="toast-container">
+      <div id="toast-message" class="toast-message">
+        <svg class="toast-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+          <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm13.36-1.814a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z" clip-rule="evenodd" />
+        </svg>
+        <span id="toast-text">Success message</span>
+      </div>
+    </div>
+
+    <!-- ===== GO TO TOP BUTTON ===== -->
+    <button id="go-top-btn" class="go-top-btn" aria-label="Go to top">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+    </button>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="site-footer">
+      <div class="footer-overlay"></div>
+      <div class="footer-inner">
+        <div class="footer-grid">
+    
+          <!-- Column 1: Logo & Info -->
+          <div class="footer-col footer-col--brand">
+            <a href="index.html" class="footer-logo">
+              <img src="assets/logo/logo_zoesmiles.png" alt="Zoe Smiles" class="footer-logo-img" />
+            </a>
+            <p class="footer-desc">
+              Providing high-end oral healthcare using cutting-edge technology and a patient-first specialist approach.
+            </p>
+            <div class="footer-socials">
+              <a href="#" aria-label="Website" class="social-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/>
+                  <path d="M2 12h20"/>
+                </svg>
+              </a>
+              <a href="#" aria-label="Facebook" class="social-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+    
+          <!-- Column 2: Quick Links -->
+          <div class="footer-col">
+            <h4 class="footer-title">Quick Links</h4>
+            <ul class="footer-links">
+              <li><a href="#home">Home</a></li>
+              <li><a href="#about">About Us</a></li>
+              <li><a href="#services">Services</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </div>
+    
+          <!-- Column 3: Our Expertise -->
+          <div class="footer-col">
+            <h4 class="footer-title">Our Expertise</h4>
+            <ul class="footer-links">
+              <li><a href="#">Cosmetic Dentistry</a></li>
+              <li><a href="#">Orthodontics</a></li>
+              <li><a href="#">Oral Surgery</a></li>
+              <li><a href="#">Pediatric Care</a></li>
+              <li><a href="#">Dental Implants</a></li>
+            </ul>
+          </div>
+    
+          <!-- Column 4: Contact -->
+          <div class="footer-col footer-col--contact">
+            <h4 class="footer-title">Contact Us</h4>
+            <p class="footer-contact-text">
+              123 Dental Plaza, Health Avenue<br>
+              Medical District, NY 10001
+            </p>
+            <p class="footer-contact-text" style="margin-top:1rem;">
+              <strong>Phone:</strong> (555) 0123-4567<br>
+              <strong>Email:</strong> care@dentalcarepremium.com
+            </p>
+          </div>
+    
+        </div>
+    
+        <div class="footer-bottom">
+          <p class="copyright">&copy; 2024 DentalCare Premium. Excellence in Oral Healthcare.</p>
+          <div class="footer-bottom-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Careers</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- ===== END FOOTER ===== -->
+
+    <!-- ===== JavaScript ===== -->
+    <script>
+      /* ── Toast Notification ── */
+      function showToast(message) {
+        const toast = document.getElementById('toast-container');
+        const toastText = document.getElementById('toast-text');
+        if (!toast || !toastText) return;
+        
+        toastText.innerText = message;
+        toast.classList.add('show');
+        
+        setTimeout(() => {
+          toast.classList.remove('show');
+        }, 4000);
+      }
+
+      /* ── Appointment Form Submission ── */
+      const apptForm = document.getElementById("hero-appt-form");
+      if (apptForm) {
+        apptForm.addEventListener("submit", async function(event) {
+          event.preventDefault();
+          const submitBtn = document.getElementById("hero-appt-submit");
+          const originalText = submitBtn.innerText;
+          submitBtn.innerText = "Sending...";
+          submitBtn.disabled = true;
+
+          const formData = new FormData(apptForm);
+          try {
+            const response = await fetch("https://formspree.io/f/xredodnn", {
+              method: "POST",
+              body: formData,
+              headers: { 'Accept': 'application/json' }
+            });
+            if (response.ok) {
+              showToast('Appointment confirmed! We will contact you shortly.');
+              apptForm.reset();
+            } else {
+              showToast('Oops! There was a problem submitting your form');
+            }
+          } catch (error) {
+            showToast('Oops! There was a problem submitting your form');
+          } finally {
+            submitBtn.innerText = originalText;
+            submitBtn.disabled = false;
+          }
+        });
+      }
+
+      /* ── Contact Form Submission ── */
+      const contactForm = document.getElementById("contact-form");
+      if (contactForm) {
+        contactForm.addEventListener("submit", async function(event) {
+          event.preventDefault();
+          const submitBtn = document.getElementById("contact-submit");
+          const originalText = submitBtn.innerText;
+          submitBtn.innerText = "Sending...";
+          submitBtn.disabled = true;
+
+          const formData = new FormData(contactForm);
+          try {
+            const response = await fetch("https://formspree.io/f/xredodnn", {
+              method: "POST",
+              body: formData,
+              headers: { 'Accept': 'application/json' }
+            });
+            if (response.ok) {
+              showToast('Message sent successfully! We will get back to you soon.');
+              contactForm.reset();
+            } else {
+              showToast('Oops! There was a problem submitting your form');
+            }
+          } catch (error) {
+            showToast('Oops! There was a problem submitting your form');
+          } finally {
+            submitBtn.innerText = originalText;
+            submitBtn.disabled = false;
+          }
+        });
+      }
+
+      /* ── Go to Top Button ── */
+      const goTopBtn = document.getElementById("go-top-btn");
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 400) {
+          goTopBtn.classList.add("show");
+        } else {
+          goTopBtn.classList.remove("show");
+        }
+      }, { passive: true });
+      goTopBtn.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+      /* ── Hamburger Toggle ── */
+      const hamburgerBtn = document.getElementById("hamburger-btn");
+      const mobileMenu   = document.getElementById("mobile-menu");
+
+      hamburgerBtn.addEventListener("click", () => {
+        const isOpen = mobileMenu.classList.toggle("is-open");
+        hamburgerBtn.classList.toggle("is-open", isOpen);
+        hamburgerBtn.setAttribute("aria-expanded", String(isOpen));
+      });
+
+      /* Close mobile menu on link click */
+      mobileMenu.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          mobileMenu.classList.remove("is-open");
+          hamburgerBtn.classList.remove("is-open");
+          hamburgerBtn.setAttribute("aria-expanded", "false");
+        });
+      });
+
+      /* ── Active Nav Link based on active Section (Scroll Spy) ── */
+      const sections = document.querySelectorAll("section");
+      const navLinks = document.querySelectorAll("#desktop-nav .nav-link");
+
+      window.addEventListener("scroll", () => {
+        let currentSec = "home";
+        sections.forEach((sec) => {
+          const secTop = sec.offsetTop;
+          if (window.scrollY >= secTop - 120) {
+            currentSec = sec.getAttribute("id");
+          }
+        });
+
+        navLinks.forEach((link) => {
+          link.classList.remove("active");
+          if (link.getAttribute("href").includes(currentSec)) {
+            link.classList.add("active");
+          }
+        });
+      }, { passive: true });
+
+      /* ── Scroll-Reveal Intersection Observer ── */
+      const revealEls = document.querySelectorAll('.reveal');
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      revealEls.forEach(el => revealObserver.observe(el));
+
+      /* ── Scroll Shadow ── */
+      const navbar = document.getElementById("site-navbar");
+
+      window.addEventListener("scroll", () => {
+        navbar.classList.toggle("navbar--scrolled", window.scrollY > 10);
+      }, { passive: true });
+    </script>
+
+  </body>
+</html>
