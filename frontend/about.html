@@ -7,7 +7,7 @@
     <meta name="description" content="Learn about Zoe Smiles Dental Clinic — our vision, mission, expert team of dentists, and commitment to advanced, compassionate dental care in Chennai." />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="assets/logo/logo_zoesmiles.png" />
+    <link rel="icon" type="image/jpeg" href="assets/logo/favicon.jpg" />
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -42,6 +42,7 @@
 
     <!-- External Stylesheet -->
     <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/chatbot.css" />
 
     <!-- About Page Extra Styles -->
     <style>
@@ -736,8 +737,14 @@
       }
 
       @media (max-width: 768px) {
-        .cta-card { padding: 2.5rem 2rem; text-align: center; justify-content: center; }
+        .cta-card { padding: 2.5rem 1.5rem; text-align: center; justify-content: center; }
         .cta-card::before { width: 100%; height: 5px; border-radius: 2rem 2rem 0 0; }
+        .cta-card__actions { justify-content: center; }
+      }
+
+      @media (max-width: 480px) {
+        .cta-card__actions { flex-direction: column; width: 100%; gap: 0.8rem; }
+        .cta-btn-primary, .cta-btn-outline { width: 100%; justify-content: center; }
       }
 
       .cta-card__text {}
@@ -1096,7 +1103,7 @@
             <p class="cta-card__sub">Join thousands of satisfied patients who trust us with their oral healthcare. Schedule your consultation today and experience the difference.</p>
           </div>
           <div class="cta-card__actions">
-            <a href="index.html#home" id="cta-book" class="cta-btn-primary">
+            <a href="#" id="cta-book" class="cta-btn-primary book-modal-trigger">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
               Book Appointment
             </a>
@@ -1119,6 +1126,7 @@
     <!-- ===== FOOTER PLACEHOLDER ===== -->
     <div id="footer-placeholder"></div>
 
+    <script src="assets/js/chatbot.js"></script>
     <script src="assets/js/main.js"></script>
 
     <!-- ===== JavaScript ===== -->

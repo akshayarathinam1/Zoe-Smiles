@@ -7,7 +7,7 @@
     <meta name="description" content="Explore our smile gallery — real patient transformations, our state-of-the-art clinic, and advanced dental technology at Zoe Smiles Dental Clinic." />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="assets/logo/logo_zoesmiles.png" />
+    <link rel="icon" type="image/jpeg" href="assets/logo/favicon.jpg" />
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -42,6 +42,7 @@
 
     <!-- External Stylesheet -->
     <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/chatbot.css" />
 
     <!-- Gallery Page Styles -->
     <style>
@@ -413,8 +414,14 @@
       }
 
       @media (max-width: 768px) {
-        .cta-card { padding: 2.5rem 2rem; }
+        .cta-card { padding: 2.5rem 1.5rem; text-align: center; justify-content: center; }
         .cta-card::before { width: 100%; height: 5px; border-radius: 2rem 2rem 0 0; }
+        .cta-card__actions { justify-content: center; }
+      }
+
+      @media (max-width: 480px) {
+        .cta-card__actions { flex-direction: column; width: 100%; gap: 0.8rem; }
+        .cta-btn-primary, .cta-btn-outline { width: 100%; justify-content: center; }
       }
 
       .cta-card__title {
@@ -700,6 +707,7 @@
     </button>
 
     <!-- Main JS (injects navbar + footer) -->
+    <script src="assets/js/chatbot.js"></script>
     <script src="assets/js/main.js"></script>
 
     <!-- ===== GALLERY PAGE SCRIPTS ===== -->

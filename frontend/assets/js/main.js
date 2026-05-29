@@ -1,12 +1,251 @@
-/* Inject Navbar and Footer */
+/* Inject Navbar, Footer, and Booking Modal */
 document.addEventListener("DOMContentLoaded", function() {
+
+  /* ── Inject Booking Modal ── */
+  const modalHTML = `
+<div id="booking-modal" class="bk-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="bk-modal-title" style="display:none;">
+  <div class="bk-modal">
+    <button class="bk-modal__close" id="bk-modal-close" aria-label="Close booking form">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="bk-modal__header">
+      <div class="bk-modal__icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+      </div>
+      <div>
+        <h2 class="bk-modal__title" id="bk-modal-title">Book an Appointment</h2>
+        <p class="bk-modal__sub">We'll confirm your visit within 24 hours.</p>
+      </div>
+    </div>
+
+    <form id="booking-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
+      <div class="bk-form-grid">
+        <div class="bk-form-group bk-form-group--full">
+          <label class="bk-label" for="bk-name">Full Name <span class="bk-req">*</span></label>
+          <input class="bk-input" type="text" id="bk-name" name="name" placeholder="Your full name" required autocomplete="name" />
+        </div>
+        <div class="bk-form-group bk-form-group--full">
+          <label class="bk-label" for="bk-phone">Phone Number <span class="bk-req">*</span></label>
+          <input class="bk-input" type="tel" id="bk-phone" name="phone" placeholder="+91 98765 43210" required autocomplete="tel" />
+        </div>
+        <div class="bk-form-group bk-form-group--full">
+          <label class="bk-label" for="bk-time">Preferred Date &amp; Time <span class="bk-req">*</span></label>
+          <input class="bk-input" type="datetime-local" id="bk-time" name="preferred_time" required />
+        </div>
+      </div>
+
+      <div class="bk-form-footer">
+        <p class="bk-privacy">🔒 Your info is safe with us.</p>
+        <button type="submit" class="bk-submit" id="bk-submit-btn">
+          <span class="bk-submit__text">Book Now</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/></svg>
+        </button>
+      </div>
+
+      <div class="bk-success" id="bk-success" style="display:none;">
+        <div class="bk-success__icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <h3 class="bk-success__title">Appointment Request Sent!</h3>
+        <p class="bk-success__msg">Thank you! Our team will contact you within 24 hours to confirm your slot.</p>
+        <button type="button" class="bk-submit" id="bk-done-btn" style="margin-top:1.2rem;">Close</button>
+      </div>
+    </form>
+  </div>
+</div>`;
+
+  const modalStyle = `<style>
+  .bk-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(10, 25, 40, 0.72);
+    backdrop-filter: blur(6px);
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    animation: bkFadeIn 0.25s ease;
+  }
+  .bk-modal-overlay.bk-hidden { display: none !important; }
+  @keyframes bkFadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes bkSlideUp { from { opacity: 0; transform: translateY(30px) scale(0.97); } to { opacity: 1; transform: translateY(0) scale(1); } }
+
+  .bk-modal {
+    position: relative;
+    background: #fff;
+    border-radius: 1.25rem;
+    padding: 2rem;
+    width: 100%;
+    max-width: 400px;
+    max-height: 92vh;
+    overflow-y: auto;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.28);
+    animation: bkSlideUp 0.3s cubic-bezier(0.34,1.56,0.64,1);
+  }
+
+  .bk-modal__close {
+    position: absolute;
+    top: 1.2rem;
+    right: 1.2rem;
+    background: #f1f5f9;
+    border: none;
+    border-radius: 50%;
+    width: 2.2rem;
+    height: 2.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #64748b;
+    transition: background 0.2s, color 0.2s;
+  }
+  .bk-modal__close:hover { background: #e2e8f0; color: #0f172a; }
+
+  .bk-modal__header {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .bk-modal__icon {
+    width: 3.2rem;
+    height: 3.2rem;
+    background: linear-gradient(135deg, #006576, #00a3b8);
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    flex-shrink: 0;
+  }
+
+  .bk-modal__title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0;
+    letter-spacing: -0.02em;
+  }
+
+  .bk-modal__sub {
+    font-size: 0.85rem;
+    color: #64748b;
+    margin: 0.2rem 0 0;
+  }
+
+  .bk-form-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+  }
+
+  @media (max-width: 540px) {
+    .bk-modal { padding: 1.8rem 1.2rem; border-radius: 1rem; }
+    .bk-form-grid { grid-template-columns: 1fr; }
+    .bk-modal__title { font-size: 1.2rem; }
+  }
+
+  .bk-form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .bk-form-group--full { grid-column: 1 / -1; }
+
+  .bk-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #374151;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  .bk-req { color: #ef4444; margin-left: 2px; }
+
+  .bk-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 0.75rem;
+    font-size: 0.9rem;
+    color: #0f172a;
+    background: #f8fafc;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    box-sizing: border-box;
+    font-family: inherit;
+  }
+  .bk-input:focus { border-color: #006576; box-shadow: 0 0 0 3px rgba(0,101,118,0.1); background: #fff; }
+  .bk-input::placeholder { color: #94a3b8; }
+
+  .bk-select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 0.8rem center; padding-right: 2.5rem; }
+
+  .bk-textarea { resize: vertical; min-height: 80px; }
+
+  .bk-form-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .bk-privacy {
+    font-size: 0.78rem;
+    color: #94a3b8;
+    margin: 0;
+  }
+
+  .bk-submit {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, #006576 0%, #00a3b8 100%);
+    color: #fff;
+    border: none;
+    border-radius: 9999px;
+    padding: 0.8rem 1.8rem;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 0.92rem;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+    white-space: nowrap;
+    box-shadow: 0 6px 24px rgba(0,101,118,0.3);
+  }
+  .bk-submit:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(0,101,118,0.4); }
+  .bk-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+
+  .bk-success {
+    text-align: center;
+    padding: 2rem 1rem;
+  }
+  .bk-success__icon {
+    width: 5rem;
+    height: 5rem;
+    background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.2rem;
+    color: #065f46;
+  }
+  .bk-success__title { font-family:'Outfit',sans-serif; font-size:1.4rem; font-weight:800; color:#0f172a; margin:0 0 0.5rem; }
+  .bk-success__msg { font-size:0.9rem; color:#64748b; line-height:1.6; margin:0; }
+</style>`;
+
+  document.head.insertAdjacentHTML('beforeend', modalStyle);
+  document.body.insertAdjacentHTML('beforeend', modalHTML);
+  initBookingModal();
+
   // Inject Navbar HTML directly to work on local file:// protocol
   const navbarHTML = `<!-- ===== PREMIUM TOP BAR ===== -->
 <div class="premium-topbar" id="premium-topbar">
   <p class="premium-topbar__text">
     <span class="premium-topbar__dot"></span>
     Now accepting new patients &mdash; Book your consultation today!
-    <a href="index.html#home" class="premium-topbar__cta">Book Now &rarr;</a>
+    <a href="contact.html#appointment" class="premium-topbar__cta">Book Now &rarr;</a>
   </p>
 </div>
 
@@ -181,140 +420,112 @@ document.addEventListener("DOMContentLoaded", function() {
     }, { threshold: 0.1 });
     footerRevealEls.forEach(el => footerObserver.observe(el));
   }
+  // Chatbot logic has been moved to chatbot.js
+});
 
-  // ===== Inject Chatbot Icon and Widget =====
-  const chatbotContainer = document.createElement('div');
-  chatbotContainer.innerHTML = `
-    <!-- Chatbot Toggle Button -->
-    <button id="chatbot-toggle-btn" class="chatbot-toggle-btn" aria-label="Open chat assistant">
-      <div class="pulse-ring"></div>
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width: 26px; height: 26px;">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 0 1-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8Z" />
-      </svg>
-      <span class="chatbot-tooltip">Chat with Zoe Assistant</span>
-    </button>
+function initBookingModal() {
+  const overlay = document.getElementById('booking-modal');
+  const closeBtn = document.getElementById('bk-modal-close');
+  const form     = document.getElementById('booking-form');
+  const success  = document.getElementById('bk-success');
+  const submitBtn = document.getElementById('bk-submit-btn');
+  const doneBtn  = document.getElementById('bk-done-btn');
 
-    <!-- Chatbot Widget Window -->
-    <div id="chatbot-widget" class="chatbot-widget">
-      <!-- Header -->
-      <div class="chatbot-header">
-        <div class="chatbot-header-info">
-          <div class="chatbot-avatar">Z</div>
-          <div class="chatbot-header-text">
-            <h4>Zoe Assistant</h4>
-            <span>Online</span>
-          </div>
-        </div>
-        <button id="chatbot-close-btn" class="chatbot-close-btn" aria-label="Close chat window">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" style="width: 20px; height: 20px;">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-          </svg>
-        </button>
-      </div>
-
-      <!-- Chat Body -->
-      <div id="chatbot-body" class="chatbot-body">
-        <div class="chat-message bot">
-          Hi there! 👋 I am Zoe's Virtual Assistant. How can I help you today?
-          <div class="chat-actions">
-            <button class="chat-action-btn" data-action="appt">📅 Book Appointment</button>
-            <button class="chat-action-btn" data-action="services">🦷 Our Services</button>
-            <button class="chat-action-btn" data-action="hours">🕒 Clinic Hours</button>
-            <button class="chat-action-btn" data-action="contact">📞 Contact Us</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Input Area -->
-      <div class="chatbot-input-area">
-        <input type="text" id="chatbot-input" placeholder="Type a message..." aria-label="Chat message input">
-        <button id="chatbot-send-btn" class="chatbot-send-btn" aria-label="Send message">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" style="width: 18px; height: 18px;">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5" />
-          </svg>
-        </button>
-      </div>
-    </div>
-  `;
-  document.body.appendChild(chatbotContainer);
-
-  const chatbotToggleBtn = document.getElementById('chatbot-toggle-btn');
-  const chatbotWidget = document.getElementById('chatbot-widget');
-  const chatbotCloseBtn = document.getElementById('chatbot-close-btn');
-  const chatbotBody = document.getElementById('chatbot-body');
-  const chatbotInput = document.getElementById('chatbot-input');
-  const chatbotSendBtn = document.getElementById('chatbot-send-btn');
-
-  // Toggle Widget
-  chatbotToggleBtn.addEventListener('click', () => {
-    chatbotWidget.classList.toggle('chatbot-widget--open');
-  });
-
-  // Close Widget
-  chatbotCloseBtn.addEventListener('click', () => {
-    chatbotWidget.classList.remove('chatbot-widget--open');
-  });
-
-  // Append user/bot messages
-  function appendMessage(text, isUser = false) {
-    const msgDiv = document.createElement('div');
-    msgDiv.className = `chat-message ${isUser ? 'user' : 'bot'}`;
-    msgDiv.innerText = text;
-    chatbotBody.appendChild(msgDiv);
-    chatbotBody.scrollTop = chatbotBody.scrollHeight;
+  // Set minimum date to today
+  const dateInput = document.getElementById('bk-date');
+  if (dateInput) {
+    const today = new Date().toISOString().split('T')[0];
+    dateInput.setAttribute('min', today);
   }
 
-  // Handle action click
-  function handleActionClick(action) {
-    appendMessage(action, true);
+  function openModal() {
+    overlay.style.display = '';
+    overlay.classList.remove('bk-hidden');
+    document.body.style.overflow = 'hidden';
     setTimeout(() => {
-      if (action.includes('Appointment')) {
-        appendMessage("You can easily schedule a premium oral health session by visiting our Contact & Appointment page (contact.html#appointment) or by filling out the Hero Section form on the Homepage!");
-      } else if (action.includes('Services')) {
-        appendMessage("We offer high-end cosmetic dentistry, advanced orthodontics, professional dental implants, pediatric care, and emergency surgery. Visit services.html to learn more!");
-      } else if (action.includes('Hours')) {
-        appendMessage("Our specialist clinic is open:\nMon - Fri: 8:00 AM - 7:00 PM\nSaturday: 9:00 AM - 4:00 PM\nSunday: Closed (Emergency on call)");
-      } else if (action.includes('Contact')) {
-        appendMessage("You can call us directly at (555) 0123-4567 or email care@zoesmiles.com. We are located at 123 Dental Plaza, Health Avenue, NY!");
-      }
-    }, 600);
+      const firstInput = overlay.querySelector('input, select');
+      if (firstInput) firstInput.focus();
+    }, 300);
   }
 
-  // Bind clicks for quick action buttons
-  chatbotBody.addEventListener('click', (e) => {
-    if (e.target.classList.contains('chat-action-btn')) {
-      const btnText = e.target.innerText;
-      handleActionClick(btnText);
+  function closeModal() {
+    overlay.classList.add('bk-hidden');
+    setTimeout(() => { overlay.style.display = 'none'; }, 200);
+    document.body.style.overflow = '';
+    form.style.display = '';
+    success.style.display = 'none';
+    form.reset();
+    if (submitBtn) submitBtn.disabled = false;
+  }
+
+  // Close on overlay click
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) closeModal();
+  });
+
+  // Close on button
+  if (closeBtn) closeBtn.addEventListener('click', closeModal);
+  if (doneBtn)  doneBtn.addEventListener('click', closeModal);
+
+  // Close on Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && overlay.style.display !== 'none') closeModal();
+  });
+
+  // Intercept ALL booking links via event delegation
+  document.addEventListener('click', (e) => {
+    const trigger = e.target.closest(
+      '[id="nav-book-btn"], [id="mob-book-btn"], [class*="premium-topbar__cta"], ' +
+      '[id="cta-book"], .book-modal-trigger'
+    );
+    if (trigger) {
+      e.preventDefault();
+      openModal();
     }
   });
 
-  // Send message
-  function handleSend() {
-    const query = chatbotInput.value.trim();
-    if (!query) return;
-    appendMessage(query, true);
-    chatbotInput.value = '';
-
-    // Mock responses
-    setTimeout(() => {
-      const q = query.toLowerCase();
-      if (q.includes('appointment') || q.includes('book') || q.includes('schedule')) {
-        appendMessage("To book a consultation, you can fill out the booking form on our homepage or head over to our dedicated Contact & Appointment page.");
-      } else if (q.includes('price') || q.includes('cost') || q.includes('insur')) {
-        appendMessage("We accept all major PPO insurance plans. For specific costs or treatment quotes, please contact our office for a personalized consultation!");
-      } else if (q.includes('hello') || q.includes('hi') || q.includes('hey')) {
-        appendMessage("Hello! How can I help you today? Please feel free to ask about our clinic hours, location, or dental services.");
-      } else {
-        appendMessage("Thank you for your message! Our clinical team will get back to you shortly, or you can call us directly at (555) 0123-4567 for immediate assistance.");
-      }
-    }, 700);
-  }
-
-  chatbotSendBtn.addEventListener('click', handleSend);
-  chatbotInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') handleSend();
+  // Also intercept topbar "Book Now" link (text-content based fallback)
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('a');
+    if (link && link.href && link.href.includes('contact.html#appointment')) {
+      e.preventDefault();
+      openModal();
+    }
   });
-});
+
+  // Form submission via Formspree
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = document.getElementById('bk-submit-btn');
+      if (btn) {
+        btn.disabled = true;
+        btn.querySelector('.bk-submit__text').textContent = 'Sending…';
+      }
+
+      const formData = new FormData(form);
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: formData,
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (response.ok) {
+          form.style.display = 'none';
+          success.style.display = 'block';
+        } else {
+          if (btn) { btn.disabled = false; btn.querySelector('.bk-submit__text').textContent = 'Confirm Appointment'; }
+          alert('Something went wrong. Please try again or call us directly.');
+        }
+      } catch (err) {
+        if (btn) { btn.disabled = false; btn.querySelector('.bk-submit__text').textContent = 'Confirm Appointment'; }
+        alert('Network error. Please check your connection and try again.');
+      }
+    });
+  }
+}
 
 function initNavbar() {
   /* ── Hamburger Toggle ── */

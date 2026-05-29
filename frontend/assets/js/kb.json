@@ -1,0 +1,179 @@
+{
+  "clinic": {
+    "name": "Zoe Smiles Multispeciality Dental Clinic",
+    "tagline": "Precision Care for Your Perfect Smile",
+    "address": "123 Mount Road, Anna Salai, Chennai, Tamil Nadu 600002",
+    "phone": "+91 (555) 0123-4567",
+    "whatsapp": "+91 (555) 0123-4567",
+    "email": "care@zoesmiles.com",
+    "website": "https://zoesmiles.com",
+    "hours": {
+      "monday_friday": "8:00 AM – 7:00 PM",
+      "saturday": "9:00 AM – 4:00 PM",
+      "sunday": "Closed (Emergency on-call available)"
+    },
+    "languages": ["English", "Tamil", "Hindi"],
+    "established": "2010",
+    "experience_years": "15+",
+    "patients_served": "10,000+",
+    "description": "Zoe Smiles Multispeciality Dental Clinic is a premium dental care centre in Chennai, offering advanced dental treatments with a patient-first approach. We combine cutting-edge technology with compassionate care to create healthy, confident smiles."
+  },
+
+  "services": [
+    {
+      "id": "implants",
+      "name": "Dental Implants",
+      "keywords": ["implant", "implants", "missing tooth", "missing teeth", "permanent teeth", "artificial tooth", "titanium"],
+      "short": "Permanent tooth replacement with natural-looking implants.",
+      "detail": "Dental implants are the gold standard for replacing missing teeth. We use titanium implants that fuse with your jawbone, providing a permanent, natural-looking solution that improves confidence, speech, and chewing ability. Treatment typically takes 3–6 months including healing time.",
+      "duration": "3–6 months (full treatment)",
+      "suitable_for": "Adults with one or more missing teeth and healthy gums"
+    },
+    {
+      "id": "smile_design",
+      "name": "Smile Designing",
+      "keywords": ["smile design", "veneers", "cosmetic", "whitening", "makeover", "smile makeover", "teeth whitening", "porcelain"],
+      "short": "Complete smile transformation with veneers, whitening & makeovers.",
+      "detail": "Our smile designing service creates a customised smile plan tailored to your facial features and preferences. We offer porcelain veneers, professional teeth whitening, composite bonding, and full smile makeovers. The result is a natural, stunning smile you can be proud of.",
+      "duration": "2–4 appointments",
+      "suitable_for": "Anyone unhappy with the appearance of their smile"
+    },
+    {
+      "id": "root_canal",
+      "name": "Root Canal Treatment",
+      "keywords": ["root canal", "rct", "infected tooth", "tooth pain", "pulp", "nerve", "toothache", "pain"],
+      "short": "Painless root canal to save damaged or infected teeth.",
+      "detail": "Modern root canal treatment at Zoe Smiles is virtually painless. We use rotary endodontic instruments and local anaesthesia to remove infected pulp, clean the canal, and seal it. This saves your natural tooth and eliminates pain. Most treatments are completed in 1–2 visits.",
+      "duration": "1–2 appointments",
+      "suitable_for": "Patients with tooth pain, sensitivity, or infected teeth"
+    },
+    {
+      "id": "crown_bridge",
+      "name": "Crown & Bridge",
+      "keywords": ["crown", "bridge", "cap", "broken tooth", "cracked tooth", "damaged tooth", "crown bridge"],
+      "short": "Durable crowns and bridges to restore damaged or missing teeth.",
+      "detail": "Dental crowns (caps) cover damaged or weak teeth to restore their shape, strength, and appearance. Bridges replace one or more missing teeth by anchoring to adjacent teeth. We use high-quality ceramic and zirconia materials for natural-looking results.",
+      "duration": "2–3 appointments",
+      "suitable_for": "Patients with damaged, broken, or missing teeth"
+    },
+    {
+      "id": "orthodontics",
+      "name": "Orthodontic Treatment",
+      "keywords": ["braces", "orthodontic", "aligners", "crooked teeth", "misaligned", "straighten", "clear aligners", "invisible braces"],
+      "short": "Braces and aligners to straighten teeth for all ages.",
+      "detail": "We offer traditional metal braces, ceramic braces, and clear aligner therapy (similar to Invisalign) to correct misaligned teeth and bite issues. Our orthodontists create customised treatment plans for children, teenagers, and adults. Most treatments take 12–24 months.",
+      "duration": "12–24 months",
+      "suitable_for": "Children, teens, and adults with misaligned teeth or bite issues"
+    },
+    {
+      "id": "dentures",
+      "name": "Complete Dentures",
+      "keywords": ["denture", "dentures", "full denture", "partial denture", "false teeth", "removable"],
+      "short": "Natural-looking full and partial dentures for a confident smile.",
+      "detail": "We fabricate high-quality complete and partial dentures that restore your smile and facial appearance. Our dentures are custom-fitted for comfort and a natural look. We also offer implant-supported dentures for even greater stability.",
+      "duration": "4–6 appointments",
+      "suitable_for": "Patients missing multiple or all teeth"
+    },
+    {
+      "id": "scaling",
+      "name": "Scaling & Cleaning",
+      "keywords": ["scaling", "cleaning", "plaque", "tartar", "polishing", "prophylaxis", "teeth cleaning", "deep cleaning"],
+      "short": "Professional cleaning to maintain healthy teeth and gums.",
+      "detail": "Professional dental scaling removes plaque and tartar buildup that regular brushing cannot remove. We recommend scaling every 6 months to prevent gum disease and cavities. The procedure includes ultrasonic scaling, polishing, and fluoride treatment. Typically takes 45–60 minutes.",
+      "duration": "45–60 minutes",
+      "suitable_for": "Everyone — recommended every 6 months"
+    },
+    {
+      "id": "gum_surgery",
+      "name": "Gum Surgery",
+      "keywords": ["gum", "gums", "periodontal", "gum disease", "gum surgery", "periodontitis", "bleeding gums", "swollen gums"],
+      "short": "Advanced gum disease treatment and periodontal care.",
+      "detail": "Our periodontists treat all stages of gum disease, from gingivitis to advanced periodontitis. Treatments include deep scaling (SRP), gum flap surgery, bone grafting, and gum grafting. Early treatment prevents tooth loss and improves overall oral health.",
+      "duration": "Varies by severity",
+      "suitable_for": "Patients with bleeding, swollen, or receding gums"
+    },
+    {
+      "id": "oral_surgery",
+      "name": "Minor Oral Surgeries",
+      "keywords": ["extraction", "tooth removal", "surgery", "wisdom tooth", "wisdom teeth", "oral surgery", "remove tooth"],
+      "short": "Safe tooth extractions and minor oral surgical procedures.",
+      "detail": "Our oral surgeons perform safe and comfortable minor oral surgeries including simple and surgical tooth extractions, wisdom tooth removal, cyst removal, and impacted tooth treatment. All procedures are done under local anaesthesia for a pain-free experience.",
+      "duration": "30–90 minutes depending on procedure",
+      "suitable_for": "Patients needing tooth removal or minor oral procedures"
+    },
+    {
+      "id": "ear_lobe",
+      "name": "Ear Lobe Repair",
+      "keywords": ["ear lobe", "earlobe", "ear repair", "torn ear", "ear piercing repair"],
+      "short": "Professional aesthetic ear lobe repair procedure.",
+      "detail": "We offer professional ear lobe repair for torn, stretched, or damaged ear lobes. The procedure is performed under local anaesthesia and takes about 30 minutes. Results are natural-looking with minimal scarring.",
+      "duration": "30 minutes",
+      "suitable_for": "Anyone with torn or damaged ear lobes"
+    }
+  ],
+
+  "faqs": [
+    {
+      "id": "booking",
+      "question": "How do I book an appointment?",
+      "keywords": ["book", "appointment", "schedule", "consultation", "visit", "when can i come", "see doctor", "reserve"],
+      "answer": "You can book an appointment in 3 easy ways:\n1️⃣ Fill the booking form right here on our website (homepage or contact page)\n2️⃣ Call us at +91 (555) 0123-4567\n3️⃣ WhatsApp us at +91 (555) 0123-4567\n\nWe're open Mon–Fri 8AM–7PM and Saturday 9AM–4PM."
+    },
+    {
+      "id": "first_visit",
+      "question": "What should I expect on my first visit?",
+      "keywords": ["first visit", "new patient", "first time", "what to expect", "first appointment"],
+      "answer": "On your first visit, our dentist will:\n✅ Take a complete dental history\n✅ Perform a thorough oral examination\n✅ Take X-rays if needed\n✅ Discuss your concerns and goals\n✅ Create a personalised treatment plan\n\nPlease arrive 10 minutes early to fill out your patient form. The initial consultation takes about 45–60 minutes."
+    },
+    {
+      "id": "pain",
+      "question": "Are dental treatments painful?",
+      "keywords": ["pain", "painful", "hurt", "anaesthesia", "numb", "scared", "afraid", "anxious", "needle"],
+      "answer": "We completely understand dental anxiety! At Zoe Smiles, patient comfort is our top priority.\n\n🎯 We use modern local anaesthesia, so most procedures are completely painless\n💉 Our dentists are highly trained in pain-free injection techniques\n🧘 We have a calm, relaxing environment to ease dental anxiety\n\nIf you have severe dental phobia, please let us know — we can discuss sedation options."
+    },
+    {
+      "id": "insurance",
+      "question": "Do you accept insurance?",
+      "keywords": ["insurance", "coverage", "cashless", "health card", "medical insurance", "claim"],
+      "answer": "We accept most major dental insurance plans and health cards. Please bring your insurance card on your first visit and we'll verify your coverage.\n\nFor specific insurance queries, please call us at +91 (555) 0123-4567 or email care@zoesmiles.com — our billing team will be happy to help."
+    },
+    {
+      "id": "cost",
+      "question": "How much do treatments cost?",
+      "keywords": ["cost", "price", "fees", "charges", "how much", "rate", "pricing", "expensive", "affordable"],
+      "answer": "Treatment costs vary depending on the specific procedure and your individual needs. We believe in transparent pricing — you'll always receive a detailed cost estimate before any treatment begins.\n\nWe also offer flexible EMI payment options for major treatments. For a specific quote, please call us at +91 (555) 0123-4567 or book a free consultation!"
+    },
+    {
+      "id": "emergency",
+      "question": "Do you handle dental emergencies?",
+      "keywords": ["emergency", "urgent", "broken tooth", "tooth fell out", "severe pain", "accident", "urgent care"],
+      "answer": "Yes! We provide emergency dental care for urgent situations.\n\n🚨 For immediate assistance, call: +91 (555) 0123-4567\n\nEmergencies we handle:\n• Severe tooth pain\n• Broken or knocked-out teeth\n• Dental trauma from accidents\n• Swelling or abscess\n\nDuring clinic hours we prioritise emergencies. After hours, an on-call dentist is available for true emergencies."
+    },
+    {
+      "id": "kids",
+      "question": "Do you treat children?",
+      "keywords": ["kids", "children", "child", "baby", "pediatric", "toddler", "young", "age"],
+      "answer": "Absolutely! We welcome patients of all ages, including children. 🦷\n\nWe recommend:\n• First dental visit by age 1 or when the first tooth appears\n• Regular checkups every 6 months from a young age\n\nOur team is experienced in making children feel comfortable and building positive dental habits from an early age."
+    },
+    {
+      "id": "preparation",
+      "question": "How do I prepare for a dental procedure?",
+      "keywords": ["prepare", "preparation", "before appointment", "what to bring", "documents"],
+      "answer": "Here's how to prepare for your visit:\n\n📋 Bring: Any previous dental records or X-rays\n💊 Medications: List all medications you're currently taking\n🍽️ Food: Avoid eating 2 hours before procedures requiring anaesthesia\n👤 ID: Bring a photo ID for first visits\n⏰ Arrive: 10 minutes early to complete paperwork\n\nIf you have any medical conditions (diabetes, heart disease, blood thinners), please inform us in advance."
+    },
+    {
+      "id": "parking",
+      "question": "Is parking available?",
+      "keywords": ["parking", "park", "car", "vehicle", "transport", "how to reach", "directions"],
+      "answer": "Yes, parking is available at our clinic on Mount Road, Anna Salai.\n\n📍 Address: 123 Mount Road, Anna Salai, Chennai, TN 600002\n\n🚌 By public transport: We're accessible by MTC bus routes on Anna Salai and a short walk from Chennai Central.\n\n📞 Need directions? Call us at +91 (555) 0123-4567 and we'll guide you!"
+    },
+    {
+      "id": "xray",
+      "question": "Are dental X-rays safe?",
+      "keywords": ["x-ray", "xray", "radiation", "safe", "scan"],
+      "answer": "Yes, dental X-rays are very safe. 🛡️\n\nAt Zoe Smiles, we use modern digital X-rays which emit up to 80% less radiation than traditional film X-rays. We also use lead aprons as a precaution.\n\nX-rays are essential for accurate diagnosis and detecting issues invisible to the naked eye. We only take X-rays when clinically necessary."
+    }
+  ],
+
+  "system_prompt": "You are Zoe Assistant, the friendly and professional AI receptionist for Zoe Smiles Multispeciality Dental Clinic in Chennai, India. Your role is to answer patient questions about the clinic — services, timings, location, doctors, and general dental information. You are warm, helpful, and professional. Always respond in the same language the patient uses (Tamil, English, or mixed Tanglish). Keep responses concise and friendly. If asked about topics outside your knowledge base, always direct patients to call +91 (555) 0123-4567 or visit the clinic. Never provide specific medical advice or diagnoses — always recommend a consultation for medical questions. Never make up information not in your knowledge base."
+}
