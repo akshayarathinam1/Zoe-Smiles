@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gallery — Zoe Smiles Multispeciality Dental Clinic</title>
+    <meta name="description" content="Explore our smile gallery — real patient transformations, our state-of-the-art clinic, and advanced dental technology at Zoe Smiles Dental Clinic." />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/logo/logo_zoesmiles.png" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+              display: ["Outfit", "sans-serif"],
+            },
+            colors: {
+              brand: {
+                DEFAULT: "#006576",
+                dark:    "#00515e",
+                light:   "#edf6f8",
+                accent:  "#f59e0b",
+              },
+            },
+          },
+        },
+      };
+    </script>
+
+    <!-- External Stylesheet -->
+    <link rel="stylesheet" href="assets/css/style.css" />
+
+    <!-- Gallery Page Styles -->
+    <style>
+      /* ── Page Hero Banner ── */
+      .gallery-hero {
+        position: relative;
+        height: 340px;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+      }
+
+      .gallery-hero__bg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        z-index: 0;
+        transform: scale(1.04);
+        transition: transform 8s ease;
+      }
+
+      .gallery-hero:hover .gallery-hero__bg {
+        transform: scale(1.0);
+      }
+
+      .gallery-hero__overlay {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        background: linear-gradient(
+          to right,
+          rgba(0, 38, 45, 0.88) 0%,
+          rgba(0, 101, 118, 0.72) 50%,
+          rgba(0, 153, 176, 0.38) 100%
+        );
+      }
+
+      .gallery-hero__content {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        max-width: 82rem;
+        margin-inline: auto;
+        padding-inline: 2rem;
+        text-align: left;
+      }
+
+      .gallery-hero__title {
+        font-family: 'Outfit', sans-serif;
+        font-size: clamp(2.2rem, 5vw, 3.5rem);
+        font-weight: 900;
+        color: #fff;
+        letter-spacing: -0.03em;
+        margin-bottom: 0.75rem;
+        text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        animation: fadeInUp 0.7s ease both;
+      }
+
+      .gallery-breadcrumb {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.85rem;
+        color: rgba(255,255,255,0.72);
+        font-weight: 500;
+        animation: fadeInUp 0.8s 0.1s ease both;
+      }
+
+      .gallery-breadcrumb a {
+        color: rgba(255,255,255,0.85);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+
+      .gallery-breadcrumb a:hover { color: #fff; }
+
+      .gallery-breadcrumb__sep { opacity: 0.5; }
+
+      /* ── Filter Tabs ── */
+      .gallery-section {
+        padding: 4rem 1.5rem 5rem;
+        background: #fff;
+        position: relative;
+      }
+
+      .gallery-inner {
+        max-width: 82rem;
+        margin-inline: auto;
+      }
+
+      .gallery-filters {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        margin-bottom: 3rem;
+      }
+
+      .filter-btn {
+        font-family: 'Outfit', sans-serif;
+        font-size: 0.85rem;
+        font-weight: 700;
+        padding: 0.55rem 1.4rem;
+        border-radius: 9999px;
+        border: 2px solid rgba(0,101,118,0.18);
+        background: transparent;
+        color: #475569;
+        cursor: pointer;
+        transition: background 0.22s, color 0.22s, border-color 0.22s, transform 0.18s;
+        letter-spacing: 0.02em;
+      }
+
+      .filter-btn:hover {
+        border-color: var(--color-brand);
+        color: var(--color-brand);
+        transform: translateY(-1px);
+      }
+
+      .filter-btn.active {
+        background: var(--gradient-brand);
+        color: #fff;
+        border-color: transparent;
+        box-shadow: var(--shadow-brand);
+      }
+
+      /* ── Masonry Grid ── */
+      .gallery-grid {
+        columns: 3;
+        column-gap: 1.25rem;
+      }
+
+      @media (max-width: 1024px) {
+        .gallery-grid { columns: 2; }
+      }
+
+      @media (max-width: 600px) {
+        .gallery-grid { columns: 1; }
+      }
+
+      .gallery-item {
+        break-inside: avoid;
+        margin-bottom: 1.25rem;
+        border-radius: 1.25rem;
+        overflow: hidden;
+        position: relative;
+        cursor: pointer;
+        box-shadow: 0 4px 16px rgba(0,101,118,0.08);
+        transition: transform 0.32s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s;
+      }
+
+      .gallery-item:hover {
+        transform: translateY(-6px) scale(1.015);
+        box-shadow: 0 18px 48px rgba(0,101,118,0.18);
+      }
+
+      .gallery-item img {
+        display: block;
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+      }
+
+      .gallery-item:hover img { transform: scale(1.06); }
+
+      /* Overlay on hover */
+      .gallery-item__overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top, rgba(0,38,45,0.72) 0%, transparent 55%);
+        opacity: 0;
+        transition: opacity 0.3s;
+        display: flex;
+        align-items: flex-end;
+        padding: 1.25rem;
+      }
+
+      .gallery-item:hover .gallery-item__overlay { opacity: 1; }
+
+      .gallery-item__label {
+        font-family: 'Outfit', sans-serif;
+        font-size: 0.88rem;
+        font-weight: 700;
+        color: #fff;
+        letter-spacing: 0.02em;
+        background: rgba(255,255,255,0.12);
+        backdrop-filter: blur(6px);
+        border: 1px solid rgba(255,255,255,0.2);
+        padding: 0.35rem 0.9rem;
+        border-radius: 9999px;
+      }
+
+      /* Zoom icon */
+      .gallery-item__zoom {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        width: 2.2rem;
+        height: 2.2rem;
+        background: rgba(255,255,255,0.15);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(255,255,255,0.3);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        opacity: 0;
+        transform: scale(0.75);
+        transition: opacity 0.28s, transform 0.28s;
+      }
+
+      .gallery-item:hover .gallery-item__zoom {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      .gallery-item__zoom svg { width: 1rem; height: 1rem; }
+
+      /* hidden items during filter */
+      .gallery-item.hidden {
+        display: none;
+      }
+
+      /* ── Lightbox ── */
+      .lightbox {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        background: rgba(0,0,0,0.92);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s;
+      }
+
+      .lightbox.open {
+        opacity: 1;
+        pointer-events: all;
+      }
+
+      .lightbox__img {
+        max-width: 90vw;
+        max-height: 85vh;
+        border-radius: 1rem;
+        box-shadow: 0 32px 80px rgba(0,0,0,0.6);
+        object-fit: contain;
+        transform: scale(0.9);
+        transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+      }
+
+      .lightbox.open .lightbox__img {
+        transform: scale(1);
+      }
+
+      .lightbox__close {
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
+        width: 2.8rem;
+        height: 2.8rem;
+        background: rgba(255,255,255,0.1);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(255,255,255,0.25);
+        border-radius: 50%;
+        color: #fff;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s, transform 0.2s;
+      }
+
+      .lightbox__close:hover {
+        background: rgba(255,255,255,0.22);
+        transform: rotate(90deg);
+      }
+
+      .lightbox__close svg { width: 1.2rem; height: 1.2rem; }
+
+      .lightbox__nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 3rem;
+        height: 3rem;
+        background: rgba(255,255,255,0.1);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(255,255,255,0.25);
+        border-radius: 50%;
+        color: #fff;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s, transform 0.2s;
+      }
+
+      .lightbox__nav:hover { background: rgba(255,255,255,0.22); }
+      .lightbox__nav--prev { left: 1.5rem; }
+      .lightbox__nav--next { right: 1.5rem; }
+      .lightbox__nav svg { width: 1.2rem; height: 1.2rem; }
+
+      .lightbox__caption {
+        position: absolute;
+        bottom: 2rem;
+        left: 50%;
+        transform: translateX(-50%);
+        font-family: 'Outfit', sans-serif;
+        font-size: 0.88rem;
+        font-weight: 600;
+        color: rgba(255,255,255,0.75);
+        background: rgba(255,255,255,0.08);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(255,255,255,0.15);
+        padding: 0.45rem 1.25rem;
+        border-radius: 9999px;
+        white-space: nowrap;
+      }
+
+      /* ── CTA Section ── */
+      .cta-section {
+        padding: 5rem 1.5rem;
+        background: var(--color-gray-50);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .cta-section::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(ellipse at 60% 50%, rgba(0,153,176,0.07) 0%, transparent 65%);
+        pointer-events: none;
+      }
+
+      .cta-card {
+        position: relative;
+        z-index: 1;
+        max-width: 64rem;
+        margin-inline: auto;
+        background: #fff;
+        border-radius: 2rem;
+        padding: 3.5rem 4rem;
+        box-shadow: 0 12px 48px rgba(0,101,118,0.1);
+        border: 1px solid rgba(0,101,118,0.08);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 2rem;
+        text-align: center;
+      }
+
+      .cta-card::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0;
+        width: 6px; height: 100%;
+        background: var(--gradient-brand);
+        border-radius: 2rem 0 0 2rem;
+      }
+
+      @media (max-width: 768px) {
+        .cta-card { padding: 2.5rem 2rem; }
+        .cta-card::before { width: 100%; height: 5px; border-radius: 2rem 2rem 0 0; }
+      }
+
+      .cta-card__title {
+        font-family: 'Outfit', sans-serif;
+        font-size: clamp(1.5rem, 2.5vw, 2rem);
+        font-weight: 900;
+        color: #0f172a;
+        letter-spacing: -0.02em;
+        margin-bottom: 0.5rem;
+      }
+
+      .cta-card__sub {
+        font-size: 0.95rem;
+        color: #64748b;
+        max-width: 32rem;
+        line-height: 1.7;
+        margin-inline: auto;
+      }
+
+      .cta-card__actions {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .cta-btn-primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: var(--gradient-brand);
+        color: #fff;
+        font-family: 'Outfit', sans-serif;
+        font-weight: 700;
+        font-size: 0.9rem;
+        padding: 0.9rem 2rem;
+        border-radius: 9999px;
+        text-decoration: none;
+        box-shadow: var(--shadow-brand);
+        transition: transform 0.2s, box-shadow 0.2s;
+        white-space: nowrap;
+      }
+
+      .cta-btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 14px 36px rgba(0,101,118,0.42);
+      }
+
+      .cta-btn-outline {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--color-brand);
+        font-family: 'Outfit', sans-serif;
+        font-weight: 700;
+        font-size: 0.9rem;
+        padding: 0.9rem 2rem;
+        border-radius: 9999px;
+        border: 2px solid rgba(0,101,118,0.3);
+        text-decoration: none;
+        background: transparent;
+        transition: border-color 0.2s, background 0.2s, color 0.2s;
+        white-space: nowrap;
+      }
+
+      .cta-btn-outline:hover {
+        border-color: var(--color-brand);
+        background: var(--color-brand-light);
+      }
+
+      /* ── Go to Top ── */
+      .go-top-btn {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        width: 3rem;
+        height: 3rem;
+        background: var(--gradient-brand);
+        color: #fff;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: var(--shadow-brand);
+        z-index: 200;
+        opacity: 0;
+        transform: translateY(12px);
+        transition: opacity 0.3s, transform 0.3s;
+      }
+
+      .go-top-btn.show { opacity: 1; transform: translateY(0); }
+      .go-top-btn:hover { transform: translateY(-3px); }
+    </style>
+  </head>
+
+  <body class="font-sans bg-white text-gray-800">
+
+    <!-- ===== NAVBAR PLACEHOLDER (injected by main.js) ===== -->
+    <div id="navbar-placeholder"></div>
+
+    <main>
+
+      <!-- ===== PAGE HERO BANNER ===== -->
+      <section class="gallery-hero" id="gallery-hero">
+        <img
+          src="assets/about/about_hero_bg.png"
+          alt="Zoe Smiles dental clinic gallery hero"
+          class="gallery-hero__bg"
+          loading="eager"
+        />
+        <div class="gallery-hero__overlay"></div>
+        <div class="gallery-hero__content">
+          <h1 class="gallery-hero__title">Our Gallery</h1>
+          <nav class="gallery-breadcrumb" aria-label="Breadcrumb">
+            <a href="index.html">Home</a>
+            <span class="gallery-breadcrumb__sep" aria-hidden="true">›</span>
+            <span>Gallery</span>
+          </nav>
+        </div>
+      </section>
+      <!-- ===== END HERO BANNER ===== -->
+
+      <!-- ===== GALLERY SECTION ===== -->
+      <section class="gallery-section" id="gallery">
+        <div class="gallery-inner">
+
+          <!-- Filter Tabs -->
+          <div class="gallery-filters" id="gallery-filters" role="tablist" aria-label="Gallery filter">
+            <button class="filter-btn active" data-filter="all"      id="filter-all"      role="tab" aria-selected="true">All</button>
+            <button class="filter-btn"        data-filter="clinic"   id="filter-clinic"   role="tab" aria-selected="false">Our Clinic</button>
+            <button class="filter-btn"        data-filter="tech"     id="filter-tech"     role="tab" aria-selected="false">Advanced Tech</button>
+            <button class="filter-btn"        data-filter="smiles"   id="filter-smiles"   role="tab" aria-selected="false">Smile Gallery</button>
+          </div>
+
+          <!-- Masonry Grid -->
+          <div class="gallery-grid" id="gallery-grid">
+
+            <!-- Clinic Images -->
+            <div class="gallery-item reveal" data-category="clinic" data-label="Reception Area" id="gitem-1">
+              <img src="assets/gallery/clinic_reception.png" alt="Zoe Smiles clinic reception area" loading="lazy" />
+              <div class="gallery-item__overlay">
+                <span class="gallery-item__label">Reception Area</span>
+              </div>
+              <div class="gallery-item__zoom" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607ZM10.5 7.5v6m3-3h-6" /></svg>
+              </div>
+            </div>
+
+            <!-- Smile Images -->
+            <div class="gallery-item reveal" data-category="smiles" data-label="Smile Transformation" id="gitem-2">
+              <img src="assets/gallery/smile_1.png" alt="Patient smile transformation before and after" loading="lazy" />
+              <div class="gallery-item__overlay">
+                <span class="gallery-item__label">Smile Transformation</span>
+              </div>
+              <div class="gallery-item__zoom" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607ZM10.5 7.5v6m3-3h-6" /></svg>
+              </div>
+            </div>
+
+            <!-- Tech Images -->
+            <div class="gallery-item reveal" data-category="tech" data-label="3D Imaging System" id="gitem-3">
+              <img src="assets/gallery/tech_imaging.png" alt="Advanced 3D dental imaging equipment" loading="lazy" />
+              <div class="gallery-item__overlay">
+                <span class="gallery-item__label">3D Imaging System</span>
+              </div>
+              <div class="gallery-item__zoom" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607ZM10.5 7.5v6m3-3h-6" /></svg>
+              </div>
+            </div>
+
+            <!-- Clinic Images -->
+            <div class="gallery-item reveal" data-category="clinic" data-label="Treatment Room" id="gitem-4">
+              <img src="assets/gallery/clinic_treatment.png" alt="Modern dental treatment room" loading="lazy" />
+              <div class="gallery-item__overlay">
+                <span class="gallery-item__label">Treatment Room</span>
+              </div>
+              <div class="gallery-item__zoom" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607ZM10.5 7.5v6m3-3h-6" /></svg>
+              </div>
+            </div>
+
+            <!-- Clinic Images -->
+            <div class="gallery-item reveal" data-category="clinic" data-label="Consultation Room" id="gitem-5">
+              <img src="assets/gallery/clinic_consultation.png" alt="Comfortable consultation room" loading="lazy" />
+              <div class="gallery-item__overlay">
+                <span class="gallery-item__label">Consultation Room</span>
+              </div>
+              <div class="gallery-item__zoom" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607ZM10.5 7.5v6m3-3h-6" /></svg>
+              </div>
+            </div>
+
+            <!-- Smile Images -->
+            <div class="gallery-item reveal" data-category="smiles" data-label="Dental Veneers" id="gitem-6">
+              <img src="assets/about/dr_elena.png" alt="Patient dental veneers treatment by Dr. Elena" loading="lazy" />
+              <div class="gallery-item__overlay">
+                <span class="gallery-item__label">Dental Veneers Treatment</span>
+              </div>
+              <div class="gallery-item__zoom" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607ZM10.5 7.5v6m3-3h-6" /></svg>
+              </div>
+            </div>
+
+            <!-- Tech Images -->
+            <div class="gallery-item reveal" data-category="tech" data-label="Digital Diagnostics" id="gitem-7">
+              <img src="assets/about/dr_robert.png" alt="Digital diagnostics and advanced imaging" loading="lazy" />
+              <div class="gallery-item__overlay">
+                <span class="gallery-item__label">Digital Diagnostics</span>
+              </div>
+              <div class="gallery-item__zoom" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607ZM10.5 7.5v6m3-3h-6" /></svg>
+              </div>
+            </div>
+
+            <!-- Smile Images -->
+            <div class="gallery-item reveal" data-category="smiles" data-label="Smile Transformation" id="gitem-8">
+              <img src="assets/about/dr_sarah.png" alt="Smile transformation result by Dr. Sarah" loading="lazy" />
+              <div class="gallery-item__overlay">
+                <span class="gallery-item__label">Smile Design</span>
+              </div>
+              <div class="gallery-item__zoom" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607ZM10.5 7.5v6m3-3h-6" /></svg>
+              </div>
+            </div>
+
+            <!-- Clinic Images -->
+            <div class="gallery-item reveal" data-category="clinic" data-label="Consultation Lounge" id="gitem-9">
+              <img src="assets/about/dr_jonathan.png" alt="Patient consultation area" loading="lazy" />
+              <div class="gallery-item__overlay">
+                <span class="gallery-item__label">Consultation Lounge</span>
+              </div>
+              <div class="gallery-item__zoom" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607ZM10.5 7.5v6m3-3h-6" /></svg>
+              </div>
+            </div>
+
+          </div><!-- /gallery-grid -->
+        </div><!-- /gallery-inner -->
+      </section>
+      <!-- ===== END GALLERY SECTION ===== -->
+
+      <!-- ===== CTA BANNER ===== -->
+      <section class="cta-section" id="cta">
+        <div class="cta-card reveal">
+          <div>
+            <h2 class="cta-card__title">Ready for a Healthier Smile?</h2>
+            <p class="cta-card__sub">Join thousands of satisfied patients who trust us with their oral healthcare. Schedule your consultation today and experience the difference.</p>
+          </div>
+          <div class="cta-card__actions">
+            <a href="index.html#home" id="cta-book" class="cta-btn-primary">Book Appointment</a>
+            <a href="index.html#contact" id="cta-call" class="cta-btn-outline">Call Clinic</a>
+          </div>
+        </div>
+      </section>
+      <!-- ===== END CTA BANNER ===== -->
+
+    </main>
+
+    <!-- ===== FOOTER PLACEHOLDER (injected by main.js) ===== -->
+    <div id="footer-placeholder"></div>
+
+    <!-- ===== LIGHTBOX ===== -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image lightbox">
+      <button class="lightbox__close" id="lightbox-close" aria-label="Close lightbox">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/></svg>
+      </button>
+      <button class="lightbox__nav lightbox__nav--prev" id="lightbox-prev" aria-label="Previous image">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="m15 19-7-7 7-7"/></svg>
+      </button>
+      <img src="" alt="" class="lightbox__img" id="lightbox-img" />
+      <button class="lightbox__nav lightbox__nav--next" id="lightbox-next" aria-label="Next image">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="m9 5 7 7-7 7"/></svg>
+      </button>
+      <div class="lightbox__caption" id="lightbox-caption"></div>
+    </div>
+
+    <!-- Go To Top -->
+    <button id="go-top-btn" class="go-top-btn" aria-label="Go to top">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+    </button>
+
+    <!-- Main JS (injects navbar + footer) -->
+    <script src="assets/js/main.js"></script>
+
+    <!-- ===== GALLERY PAGE SCRIPTS ===== -->
+    <script>
+      /* ── Go to Top Button ── */
+      const goTopBtn = document.getElementById("go-top-btn");
+      window.addEventListener("scroll", () => {
+        goTopBtn.classList.toggle("show", window.scrollY > 400);
+      }, { passive: true });
+      goTopBtn.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+
+      /* ── Scroll-Reveal Observer ── */
+      const revealEls = document.querySelectorAll('.reveal');
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      revealEls.forEach(el => revealObserver.observe(el));
+
+      /* ── Gallery Filter ── */
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const galleryItems = document.querySelectorAll('.gallery-item');
+
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          // Update active state
+          filterBtns.forEach(b => {
+            b.classList.remove('active');
+            b.setAttribute('aria-selected', 'false');
+          });
+          btn.classList.add('active');
+          btn.setAttribute('aria-selected', 'true');
+
+          const filter = btn.dataset.filter;
+
+          galleryItems.forEach(item => {
+            const cat = item.dataset.category;
+            if (filter === 'all' || cat === filter) {
+              item.classList.remove('hidden');
+            } else {
+              item.classList.add('hidden');
+            }
+          });
+        });
+      });
+
+      /* ── Lightbox ── */
+      const lightbox     = document.getElementById('lightbox');
+      const lightboxImg  = document.getElementById('lightbox-img');
+      const lightboxCap  = document.getElementById('lightbox-caption');
+      const lightboxClose = document.getElementById('lightbox-close');
+      const lightboxPrev = document.getElementById('lightbox-prev');
+      const lightboxNext = document.getElementById('lightbox-next');
+
+      let visibleItems = [];
+      let currentIndex = 0;
+
+      function getVisibleItems() {
+        return [...document.querySelectorAll('.gallery-item:not(.hidden)')];
+      }
+
+      function openLightbox(index) {
+        visibleItems = getVisibleItems();
+        currentIndex = index;
+        const item = visibleItems[currentIndex];
+        if (!item) return;
+        const img = item.querySelector('img');
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        lightboxCap.textContent = item.dataset.label || '';
+        lightbox.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+
+      function showPrev() {
+        currentIndex = (currentIndex - 1 + visibleItems.length) % visibleItems.length;
+        const item = visibleItems[currentIndex];
+        const img = item.querySelector('img');
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        lightboxCap.textContent = item.dataset.label || '';
+      }
+
+      function showNext() {
+        currentIndex = (currentIndex + 1) % visibleItems.length;
+        const item = visibleItems[currentIndex];
+        const img = item.querySelector('img');
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        lightboxCap.textContent = item.dataset.label || '';
+      }
+
+      galleryItems.forEach((item, i) => {
+        item.addEventListener('click', () => {
+          visibleItems = getVisibleItems();
+          const visIndex = visibleItems.indexOf(item);
+          openLightbox(visIndex);
+        });
+      });
+
+      lightboxClose.addEventListener('click', closeLightbox);
+      lightboxPrev.addEventListener('click', showPrev);
+      lightboxNext.addEventListener('click', showNext);
+
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) closeLightbox();
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (!lightbox.classList.contains('open')) return;
+        if (e.key === 'Escape')      closeLightbox();
+        if (e.key === 'ArrowLeft')   showPrev();
+        if (e.key === 'ArrowRight')  showNext();
+      });
+    </script>
+
+  </body>
+</html>

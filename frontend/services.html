@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Services — Zoe Smiles Multispeciality Dental Clinic</title>
+    <meta name="description" content="Explore our wide range of dental services including general dentistry, cosmetic treatments, orthodontics, and more at Zoe Smiles Dental Clinic." />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/logo/logo_zoesmiles.png" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+              display: ["Outfit", "sans-serif"],
+            },
+            colors: {
+              brand: {
+                DEFAULT: "#006576",
+                dark:    "#00515e",
+                light:   "#edf6f8",
+                accent:  "#f59e0b",
+              },
+            },
+          },
+        },
+      };
+    </script>
+
+    <!-- External Stylesheet -->
+    <link rel="stylesheet" href="assets/css/style.css" />
+
+    <!-- Services Page Extra Styles -->
+    <style>
+      /* ── Page Hero Banner ── */
+      .services-page-hero {
+        position: relative;
+        height: 340px;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+      }
+
+      .services-page-hero__bg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        z-index: 0;
+        transform: scale(1.04);
+        transition: transform 8s ease;
+      }
+
+      .services-page-hero:hover .services-page-hero__bg {
+        transform: scale(1.0);
+      }
+
+      .services-page-hero__overlay {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        background: linear-gradient(
+          to right,
+          rgba(0, 38, 45, 0.88) 0%,
+          rgba(0, 101, 118, 0.72) 50%,
+          rgba(0, 153, 176, 0.38) 100%
+        );
+      }
+
+      .services-page-hero__content {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        max-width: 82rem;
+        margin-inline: auto;
+        padding-inline: 2rem;
+        text-align: left;
+      }
+
+      .services-page-hero__title {
+        font-family: 'Outfit', sans-serif;
+        font-size: clamp(2.2rem, 5vw, 3.5rem);
+        font-weight: 900;
+        color: #fff;
+        letter-spacing: -0.03em;
+        margin-bottom: 0.75rem;
+        text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        animation: fadeInUp 0.7s ease both;
+      }
+
+      .services-breadcrumb {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 0.5rem;
+        font-size: 0.85rem;
+        color: rgba(255,255,255,0.72);
+        font-weight: 500;
+        animation: fadeInUp 0.8s 0.1s ease both;
+      }
+
+      .services-breadcrumb a {
+        color: rgba(255,255,255,0.85);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+
+      .services-breadcrumb a:hover { color: #fff; }
+
+      .services-breadcrumb__sep {
+        opacity: 0.5;
+      }
+
+      /* ── CTA Banner ── */
+      .cta-section {
+        padding: 5rem 1.5rem;
+        background: var(--color-gray-50);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .cta-section::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(ellipse at 60% 50%, rgba(0,153,176,0.07) 0%, transparent 65%);
+        pointer-events: none;
+      }
+
+      .cta-card {
+        position: relative;
+        z-index: 1;
+        max-width: 64rem;
+        margin-inline: auto;
+        background: #fff;
+        border-radius: 2rem;
+        padding: 3.5rem 4rem;
+        box-shadow: 0 12px 48px rgba(0,101,118,0.1);
+        border: 1px solid rgba(0,101,118,0.08);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2.5rem;
+        flex-wrap: wrap;
+      }
+
+      .cta-card::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0;
+        width: 6px; height: 100%;
+        background: var(--gradient-brand);
+        border-radius: 2rem 0 0 2rem;
+      }
+
+      @media (max-width: 768px) {
+        .cta-card { padding: 2.5rem 2rem; text-align: center; justify-content: center; }
+        .cta-card::before { width: 100%; height: 5px; border-radius: 2rem 2rem 0 0; }
+      }
+
+      .cta-card__title {
+        font-family: 'Outfit', sans-serif;
+        font-size: clamp(1.5rem, 2.5vw, 2rem);
+        font-weight: 900;
+        color: #0f172a;
+        letter-spacing: -0.02em;
+        margin-bottom: 0.5rem;
+      }
+
+      .cta-card__sub {
+        font-size: 0.95rem;
+        color: #64748b;
+        max-width: 28rem;
+        line-height: 1.7;
+      }
+
+      .cta-card__actions {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        flex-shrink: 0;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .cta-btn-primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: var(--gradient-brand);
+        color: #fff;
+        font-family: 'Outfit', sans-serif;
+        font-weight: 700;
+        font-size: 0.9rem;
+        padding: 0.9rem 2rem;
+        border-radius: 9999px;
+        text-decoration: none;
+        box-shadow: var(--shadow-brand);
+        transition: transform 0.2s, box-shadow 0.2s;
+        white-space: nowrap;
+      }
+
+      .cta-btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 14px 36px rgba(0,101,118,0.42);
+      }
+
+      .cta-btn-outline {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--color-brand);
+        font-family: 'Outfit', sans-serif;
+        font-weight: 700;
+        font-size: 0.9rem;
+        padding: 0.9rem 2rem;
+        border-radius: 9999px;
+        border: 2px solid rgba(0,101,118,0.3);
+        text-decoration: none;
+        background: transparent;
+        transition: border-color 0.2s, background 0.2s, color 0.2s;
+        white-space: nowrap;
+      }
+
+      .cta-btn-outline:hover {
+        border-color: var(--color-brand);
+        background: var(--color-brand-light);
+      }
+
+      /* ── Go to Top ── */
+      .go-top-btn {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        width: 3rem;
+        height: 3rem;
+        background: var(--gradient-brand);
+        color: #fff;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: var(--shadow-brand);
+        z-index: 200;
+        opacity: 0;
+        transform: translateY(12px);
+        transition: opacity 0.3s, transform 0.3s;
+      }
+
+      .go-top-btn.show { opacity: 1; transform: translateY(0); }
+      .go-top-btn:hover { transform: translateY(-3px); }
+      
+      /* Make read more link in services card look nice */
+      .svc-card__link {
+        display: inline-block;
+        margin-top: 1rem;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--color-brand);
+        text-decoration: none;
+        transition: color 0.2s, transform 0.2s;
+      }
+      .svc-card__link:hover {
+        color: #0f172a;
+        transform: translateX(3px);
+      }
+    </style>
+  </head>
+
+  <body class="font-sans bg-white text-gray-800">
+
+    <!-- ===== NAVBAR PLACEHOLDER ===== -->
+    <div id="navbar-placeholder"></div>
+
+    <main>
+
+      <!-- ===== PAGE HERO BANNER ===== -->
+      <section class="services-page-hero" id="services-hero">
+        <img
+          src="assets/about/about_hero_bg.png"
+          alt="Zoe Smiles modern dental clinic interior"
+          class="services-page-hero__bg"
+          loading="eager"
+        />
+        <div class="services-page-hero__overlay"></div>
+        <div class="services-page-hero__content">
+          <h1 class="services-page-hero__title">Our Dental Services</h1>
+          <nav class="services-breadcrumb" aria-label="Breadcrumb">
+            <a href="index.html">Home</a>
+            <span class="services-breadcrumb__sep" aria-hidden="true">›</span>
+            <span>Services</span>
+          </nav>
+        </div>
+      </section>
+      <!-- ===== END HERO BANNER ===== -->
+
+      <!-- ===== SERVICES ===== -->
+      <section id="services" class="svc-section">
+        <div class="svc-inner">
+
+          <!-- Section Header -->
+          <div class="svc-header reveal">
+            <div class="svc-eyebrow" style="justify-content:center;">
+              <!-- Tooth icon -->
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="svc-eyebrow__icon" aria-hidden="true">
+                <path d="M12 2C9.5 2 7 3.5 6 5.5 5 7.5 5 10 6 12c.5 1 1 3 1 5 0 1.1.9 2 2 2h.5c.8 0 1.5-.6 1.5-1.5V17c0-.6.4-1 1-1s1 .4 1 1v.5c0 .9.7 1.5 1.5 1.5H15c1.1 0 2-.9 2-2 0-2 .5-4 1-5 1-2 1-4.5 0-6.5C17 3.5 14.5 2 12 2z"/>
+              </svg>
+              WHY CHOOSE US
+            </div>
+            <h2 class="svc-heading" style="text-align:center;">Our Services</h2>
+          </div>
+
+          <!-- Services Grid -->
+          <div class="svc-grid">
+
+            <!-- 1. Dental Implants -->
+            <div class="svc-card reveal" id="svc-implants">
+              <div class="svc-icon-wrap">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M12 2C9.5 2 7 3.5 6 5.5 5 7.5 5 10 6 12c.5 1 1 3 1 5 0 1.1.9 2 2 2h.5c.8 0 1.5-.6 1.5-1.5V17c0-.6.4-1 1-1s1 .4 1 1v.5c0 .9.7 1.5 1.5 1.5H15c1.1 0 2-.9 2-2 0-2 .5-4 1-5 1-2 1-4.5 0-6.5C17 3.5 14.5 2 12 2z"/>
+                </svg>
+              </div>
+              <h4 class="svc-card__title">Dental Implants</h4>
+              <p class="svc-card__desc">Restore missing teeth permanently with natural-looking, durable dental implants that improve confidence, speech, and chewing ability.</p>
+              <a href="index.html#contact" class="svc-card__link">Read More &rarr;</a>
+            </div>
+
+            <!-- 2. Smile Designing -->
+            <div class="svc-card reveal" id="svc-smile">
+              <div class="svc-icon-wrap">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M9 4.5a.75.75 0 0 1 .721.544l.813 2.846a3.75 3.75 0 0 0 2.576 2.576l2.846.813a.75.75 0 0 1 0 1.442l-2.846.813a3.75 3.75 0 0 0-2.576 2.576l-.813 2.846a.75.75 0 0 1-1.442 0l-.813-2.846a3.75 3.75 0 0 0-2.576-2.576l-2.846-.813a.75.75 0 0 1 0-1.442l2.846-.813A3.75 3.75 0 0 0 7.466 7.89l.813-2.846A.75.75 0 0 1 9 4.5Zm9-3a.75.75 0 0 1 .728.568l.258 1.036a2.25 2.25 0 0 0 1.91 1.91l1.036.258a.75.75 0 0 1 0 1.456l-1.036.258a2.25 2.25 0 0 0-1.91 1.91l-.258 1.036a.75.75 0 0 1-1.456 0l-.258-1.036a2.25 2.25 0 0 0-1.91-1.91l-1.036-.258a.75.75 0 0 1 0-1.456l1.036-.258a2.25 2.25 0 0 0 1.91-1.91l.258-1.036A.75.75 0 0 1 18 1.5Z" clip-rule="evenodd"/>
+                </svg>
+              </div>
+              <h4 class="svc-card__title">Smile Designing</h4>
+              <p class="svc-card__desc">Transform your smile with customized cosmetic dental treatments including veneers, whitening, and complete smile makeovers.</p>
+              <a href="index.html#contact" class="svc-card__link">Read More &rarr;</a>
+            </div>
+
+            <!-- 3. Root Canal Treatment -->
+            <div class="svc-card reveal" id="svc-rootcanal">
+              <div class="svc-icon-wrap">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M12.516 2.17a.75.75 0 0 0-1.032 0 11.209 11.209 0 0 1-7.877 3.08.75.75 0 0 0-.722.515A12.74 12.74 0 0 0 2.25 9.75c0 5.942 4.064 10.933 9.563 12.348a.749.749 0 0 0 .374 0c5.499-1.415 9.563-6.406 9.563-12.348 0-1.39-.223-2.73-.635-3.985a.75.75 0 0 0-.722-.516l-.143.001c-2.996 0-5.717-1.17-7.734-3.08Zm3.094 8.016a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z" clip-rule="evenodd"/>
+                </svg>
+              </div>
+              <h4 class="svc-card__title">Root Canal Treatment</h4>
+              <p class="svc-card__desc">Save damaged or infected teeth with painless root canal procedures that preserve your natural tooth structure.</p>
+              <a href="index.html#contact" class="svc-card__link">Read More &rarr;</a>
+            </div>
+
+            <!-- 4. Crown & Bridge -->
+            <div class="svc-card reveal" id="svc-crown">
+              <div class="svc-icon-wrap">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M2 19h20v2H2v-2zm1-8h3v6H3v-6zm15 0h3v6h-3v-6zM8 5h8v2H8V5zM7 9h10v6H7V9zm-3.5 0h3v1H3.5V9zm14 0h3v1h-3V9z"/>
+                </svg>
+              </div>
+              <h4 class="svc-card__title">Crown &amp; Bridge</h4>
+              <p class="svc-card__desc">Repair damaged or missing teeth with strong, comfortable, and natural-looking crowns and bridges.</p>
+              <a href="index.html#contact" class="svc-card__link">Read More &rarr;</a>
+            </div>
+
+            <!-- 5. Orthodontic Treatment -->
+            <div class="svc-card reveal" id="svc-ortho">
+              <div class="svc-icon-wrap">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm-1.72 6.97a.75.75 0 1 0-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 1 0 1.06 1.06L12 13.06l1.72 1.72a.75.75 0 1 0 1.06-1.06L13.06 12l1.72-1.72a.75.75 0 1 0-1.06-1.06L12 10.94l-1.72-1.72Z" clip-rule="evenodd"/>
+                </svg>
+              </div>
+              <h4 class="svc-card__title">Orthodontic Treatment</h4>
+              <p class="svc-card__desc">Correct misaligned teeth and bite issues with modern braces and orthodontic solutions for all ages.</p>
+              <a href="index.html#contact" class="svc-card__link">Read More &rarr;</a>
+            </div>
+
+            <!-- 6. Complete Denture -->
+            <div class="svc-card reveal" id="svc-denture">
+              <div class="svc-icon-wrap">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M12 2.25a.75.75 0 0 1 .75.75v.756a8.25 8.25 0 0 1 7.162 7.842.75.75 0 0 1-1.5 0c0-3.328-2.316-6.116-5.412-6.804V6.5a.75.75 0 0 1-1.5 0V4.748c-3.096.688-5.412 3.476-5.412 6.804a.75.75 0 0 1-1.5 0A8.25 8.25 0 0 1 11.25 3.756V3a.75.75 0 0 1 .75-.75Zm0 12.75a3.75 3.75 0 0 0 3.75-3.75v-.75a.75.75 0 0 1 1.5 0v.75a5.25 5.25 0 0 1-10.5 0v-.75a.75.75 0 0 1 1.5 0v.75A3.75 3.75 0 0 0 12 15Z" clip-rule="evenodd"/>
+                </svg>
+              </div>
+              <h4 class="svc-card__title">Complete Denture</h4>
+              <p class="svc-card__desc">Restore your smile and facial appearance with comfortable, natural-looking full dentures.</p>
+              <a href="index.html#contact" class="svc-card__link">Read More &rarr;</a>
+            </div>
+
+            <!-- 7. Scaling & Cleaning -->
+            <div class="svc-card reveal" id="svc-scaling">
+              <div class="svc-icon-wrap">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10.83 5.141a10.5 10.5 0 0 0-4.04 4.04c-.31.537-.96.79-1.536.529a1.5 1.5 0 0 1-.806-1.944 13.5 13.5 0 0 1 5.195-5.195 1.5 1.5 0 0 1 1.944.806c.261.576.008 1.226-.529 1.536Zm5.44 11.968a10.5 10.5 0 0 0 4.04-4.04c.31-.537.96-.79 1.536-.529a1.5 1.5 0 0 1 .806 1.944 13.5 13.5 0 0 1-5.195 5.195 1.5 1.5 0 0 1-1.944-.806c-.261-.576-.008-1.226.529-1.536ZM12 7.5a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9Z" clip-rule="evenodd"/>
+                </svg>
+              </div>
+              <h4 class="svc-card__title">Scaling &amp; Cleaning</h4>
+              <p class="svc-card__desc">Maintain healthy teeth and gums with professional cleaning and plaque removal treatments.</p>
+              <a href="index.html#contact" class="svc-card__link">Read More &rarr;</a>
+            </div>
+
+            <!-- 8. Gum Surgery -->
+            <div class="svc-card reveal" id="svc-gumsurg">
+              <div class="svc-icon-wrap">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z"/>
+                </svg>
+              </div>
+              <h4 class="svc-card__title">Gum Surgery</h4>
+              <p class="svc-card__desc">Protect your oral health with advanced gum disease treatments and periodontal surgical care.</p>
+              <a href="index.html#contact" class="svc-card__link">Read More &rarr;</a>
+            </div>
+
+            <!-- 9. Minor Oral Surgeries -->
+            <div class="svc-card reveal" id="svc-minorsurg">
+              <div class="svc-icon-wrap">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M7.502 6h7.128A3.375 3.375 0 0 1 18 9.375v9.375a3 3 0 0 0 3-3V6.108c0-1.505-1.125-2.811-2.664-2.94a48.972 48.972 0 0 0-.673-.05A3 3 0 0 0 15 1.5h-1.5a3 3 0 0 0-2.663 1.618c-.225.015-.45.032-.673.05C8.662 3.295 7.554 4.542 7.502 6ZM13.5 3A1.5 1.5 0 0 0 12 4.5h4.5A1.5 1.5 0 0 0 15 3h-1.5Z" clip-rule="evenodd"/>
+                  <path fill-rule="evenodd" d="M3 9.375C3 8.339 3.84 7.5 4.875 7.5h9.75c1.036 0 1.875.84 1.875 1.875v11.25c0 1.035-.84 1.875-1.875 1.875h-9.75A1.875 1.875 0 0 1 3 20.625V9.375Zm9.586 4.594a.75.75 0 0 0-1.172-.938l-2.476 3.096-.908-.907a.75.75 0 0 0-1.06 1.06l1.5 1.5a.75.75 0 0 0 1.116-.062l3-3.75Z" clip-rule="evenodd"/>
+                </svg>
+              </div>
+              <h4 class="svc-card__title">Minor Oral Surgeries</h4>
+              <p class="svc-card__desc">Experience safe and comfortable minor oral surgical procedures including tooth extractions and dental surgeries.</p>
+              <a href="index.html#contact" class="svc-card__link">Read More &rarr;</a>
+            </div>
+
+            <!-- 10. Ear Lobe Repair -->
+            <div class="svc-card reveal" id="svc-earlobe">
+              <div class="svc-icon-wrap">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M12 6.75a5.25 5.25 0 0 1 6.775-5.025.75.75 0 0 1 .313 1.248l-3.32 3.319c.063.475.276.934.641 1.299.365.365.824.578 1.3.641l3.318-3.319a.75.75 0 0 1 1.248.313 5.25 5.25 0 0 1-5.472 6.756c-1.018-.086-1.87.1-2.309.634L7.344 21.3A3.298 3.298 0 1 1 2.7 16.657l8.684-7.151c.533-.44.72-1.291.634-2.309A5.342 5.342 0 0 1 12 6.75ZM4.117 19.125a.75.75 0 0 1 .75-.75h.008a.75.75 0 0 1 .75.75v.008a.75.75 0 0 1-.75.75h-.008a.75.75 0 0 1-.75-.75v-.008Z" clip-rule="evenodd"/>
+                </svg>
+              </div>
+              <h4 class="svc-card__title">Ear Lobe Repair</h4>
+              <p class="svc-card__desc">Restore torn or damaged ear lobes with professional aesthetic ear lobe repair procedures.</p>
+              <a href="index.html#contact" class="svc-card__link">Read More &rarr;</a>
+            </div>
+
+          </div><!-- /svc-grid -->
+        </div>
+      </section>
+
+
+      <!-- ===== TESTIMONIALS SECTION ===== -->
+      <section id="testimonials" class="testi-section">
+        <!-- Background overlay -->
+        <div class="testi-overlay"></div>
+
+        <div class="testi-inner relative group">
+          <!-- Heading -->
+          <h2 class="testi-heading">What People Say</h2>
+
+          <!-- 3-column grid -->
+          <div class="testi-grid">
+
+            <!-- Card 1 -->
+            <div class="testi-card">
+              <p class="testi-quote">Lorem ipsum dolor sit amet, consecng elit. Praesent vestibulum molestie lacus. Aenean nonu hen aurisllus porta. Fusce suscipit varius mi.</p>
+              <div class="testi-author">
+                <img src="assets/avatar_gregory.png" alt="Gregory Bowman" class="testi-avatar" />
+                <span class="testi-name">Gregory Bowman</span>
+              </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="testi-card">
+              <p class="testi-quote">The friendly atmosphere and state of the art interior makes you relax. I have had a dental phobia most of my life, but it's gone after just one visit here!</p>
+              <div class="testi-author">
+                <img src="assets/avatar_helen.png" alt="Helen Smith" class="testi-avatar" />
+                <span class="testi-name">Helen Smith</span>
+              </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="testi-card">
+              <p class="testi-quote">After visiting a number of dentists over the years, I have finally found one who I trust, without a doubt the most caring and professional staff.</p>
+              <div class="testi-author">
+                <img src="assets/avatar_gregory.png" alt="Gregory Bowman" class="testi-avatar" />
+                <span class="testi-name">Gregory Bowman</span>
+              </div>
+            </div>
+
+          </div><!-- /testi-grid -->
+        </div><!-- /testi-inner -->
+      </section>
+
+      <!-- ===== CTA BANNER ===== -->
+      <section class="cta-section" id="cta">
+        <div class="cta-card reveal">
+          <div class="cta-card__text" style="text-align: center;">
+            <h2 class="cta-card__title">Ready for a Healthier Smile?</h2>
+            <p class="cta-card__sub" style="max-width: 100%; text-align: center; margin: 0 auto 1.5rem auto;">Join thousands of satisfied patients who trust us with their oral healthcare. Schedule your consultation today and experience the difference.</p>
+          </div>
+          <div class="cta-card__actions" style="margin: 0 auto;">
+            <a href="index.html#home" id="cta-book" class="cta-btn-primary">
+              Book Appointment
+            </a>
+            <a href="index.html#contact" id="cta-call" class="cta-btn-outline">
+              Call Clinic
+            </a>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ===== FOOTER PLACEHOLDER ===== -->
+    <div id="footer-placeholder"></div>
+    <script src="assets/js/main.js"></script>
+
+    <!-- Go To Top -->
+    <button id="go-top-btn" class="go-top-btn" aria-label="Go to top">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+    </button>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="toast-container">
+      <div class="toast-message" id="toast-message">
+        <svg class="toast-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg>
+        <span id="toast-text">Success message</span>
+      </div>
+    </div>
+
+    <!-- ===== JS SCRIPTS ===== -->
+    <script>
+      /* ── Toast Notification Function ── */
+      function showToast(message) {
+        const toast = document.getElementById('toast-container');
+        const toastText = document.getElementById('toast-text');
+        toastText.innerText = message;
+        toast.classList.add('show');
+        setTimeout(() => {
+          toast.classList.remove('show');
+        }, 4000);
+      }
+
+      /* ── Go to Top Button ── */
+      const goTopBtn = document.getElementById("go-top-btn");
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 400) {
+          goTopBtn.classList.add("show");
+        } else {
+          goTopBtn.classList.remove("show");
+        }
+      }, { passive: true });
+      goTopBtn.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+
+      /* NOTE: Hamburger toggle and navbar scroll-shadow are handled by main.js → initNavbar() */
+
+      /* ── Scroll-Reveal Intersection Observer ── */
+      const revealEls = document.querySelectorAll('.reveal');
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      revealEls.forEach(el => revealObserver.observe(el));
+    </script>
+  </body>
+</html>
