@@ -2,7 +2,7 @@
   "clinic": {
     "name": "Zoe Smiles Multispeciality Dental Clinic",
     "tagline": "Precision Care for Your Perfect Smile",
-    "address": "123 Mount Road, Anna Salai, Chennai, Tamil Nadu 600002",
+    "address": "Anderson School Campus, Opp. Govt. ITI, Yercaud Main Road, Salem - 636007",
     "phone": "+91 (555) 0123-4567",
     "whatsapp": "+91 (555) 0123-4567",
     "email": "care@zoesmiles.com",
@@ -16,7 +16,7 @@
     "established": "2010",
     "experience_years": "15+",
     "patients_served": "10,000+",
-    "description": "Zoe Smiles Multispeciality Dental Clinic is a premium dental care centre in Chennai, offering advanced dental treatments with a patient-first approach. We combine cutting-edge technology with compassionate care to create healthy, confident smiles."
+    "description": "Zoe Smiles Multispeciality Dental Clinic is a premium dental care centre in Salem, offering advanced dental treatments with a patient-first approach. We combine cutting-edge technology with compassionate care to create healthy, confident smiles."
   },
 
   "services": [
@@ -109,6 +109,33 @@
       "detail": "We offer professional ear lobe repair for torn, stretched, or damaged ear lobes. The procedure is performed under local anaesthesia and takes about 30 minutes. Results are natural-looking with minimal scarring.",
       "duration": "30 minutes",
       "suitable_for": "Anyone with torn or damaged ear lobes"
+    },
+    {
+      "id": "pediatric",
+      "name": "Pediatric Dentistry",
+      "keywords": ["pediatric", "child", "children", "kids", "baby", "toddler", "milk teeth"],
+      "short": "Gentle dental care for children focused on prevention, treatment, and healthy smile development.",
+      "detail": "Our pediatric dentistry service provides gentle and friendly dental care for children. We focus on prevention, treating cavities in milk teeth, fluoride applications, and guiding healthy smile development in a comfortable environment.",
+      "duration": "30–45 minutes",
+      "suitable_for": "Infants, toddlers, children, and teenagers"
+    },
+    {
+      "id": "veneers",
+      "name": "Veneers",
+      "keywords": ["veneer", "veneers", "porcelain veneers", "chipped teeth", "stained teeth", "gap", "composite veneers"],
+      "short": "Thin custom shells that enhance the appearance of stained, chipped, or uneven teeth.",
+      "detail": "Dental veneers are thin, custom-made shells crafted of tooth-colored materials designed to cover the front surface of teeth. They are an ideal solution for treating chipped, discolored, slightly misaligned, or uneven teeth.",
+      "duration": "2–3 appointments",
+      "suitable_for": "Patients with chipped, stained, or uneven teeth seeking cosmetic improvement"
+    },
+    {
+      "id": "restorations",
+      "name": "Tooth-Colored Restorations",
+      "keywords": ["filling", "fillings", "restoration", "cavity", "tooth-colored", "composite", "decay", "silver filling replacement"],
+      "short": "Natural-looking fillings and restorations that repair cavities and damaged teeth.",
+      "detail": "We use high-quality composite resins for tooth-colored restorations (fillings) to treat cavities and minor tooth damage. These restorations blend seamlessly with your natural tooth color and provide strong, durable protection.",
+      "duration": "30–60 minutes",
+      "suitable_for": "Patients with cavities, tooth decay, or minor tooth damage"
     }
   ],
 
@@ -165,7 +192,7 @@
       "id": "parking",
       "question": "Is parking available?",
       "keywords": ["parking", "park", "car", "vehicle", "transport", "how to reach", "directions"],
-      "answer": "Yes, parking is available at our clinic on Mount Road, Anna Salai.\n\n📍 Address: 123 Mount Road, Anna Salai, Chennai, TN 600002\n\n🚌 By public transport: We're accessible by MTC bus routes on Anna Salai and a short walk from Chennai Central.\n\n📞 Need directions? Call us at +91 (555) 0123-4567 and we'll guide you!"
+      "answer": "Yes, parking is available at our clinic.\n\n📍 Address: Anderson School Campus, Opp. Govt. ITI, Yercaud Main Road, Salem - 636007\n\n📞 Need directions? Call us at +91 (555) 0123-4567 and we'll guide you!"
     },
     {
       "id": "xray",
@@ -175,5 +202,5 @@
     }
   ],
 
-  "system_prompt": "You are Zoe Assistant, the friendly and professional AI receptionist for Zoe Smiles Multispeciality Dental Clinic in Chennai, India. Your role is to answer patient questions about the clinic — services, timings, location, doctors, and general dental information. You are warm, helpful, and professional. Always respond in the same language the patient uses (Tamil, English, or mixed Tanglish). Keep responses concise and friendly. If asked about topics outside your knowledge base, always direct patients to call +91 (555) 0123-4567 or visit the clinic. Never provide specific medical advice or diagnoses — always recommend a consultation for medical questions. Never make up information not in your knowledge base."
+  "system_prompt": "You are Zoe Assistant, the friendly and professional AI receptionist for Zoe Smiles Multispeciality Dental Clinic in Salem, India. Your role is to answer patient questions about the clinic — services, timings, location, doctors, and general dental information. You are warm, helpful, and professional. Always respond in the same language the patient uses (Tamil, English, or mixed Tanglish). Keep responses concise and friendly. If asked about topics outside your knowledge base, always direct patients to call +91 (555) 0123-4567 or visit the clinic. Never provide specific medical advice or diagnoses — always recommend a consultation for medical questions. Never make up information not in your knowledge base."
 }

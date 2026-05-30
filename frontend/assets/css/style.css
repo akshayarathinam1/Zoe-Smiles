@@ -65,7 +65,7 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 80px;
+  scroll-padding-top: 130px;
 }
 
 body {
@@ -77,6 +77,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-feature-settings: "liga" 1, "kern" 1;
   text-rendering: optimizeLegibility;
+  /* Offset for fixed top-bar (~36px) + fixed navbar (~72px mobile / ~88px desktop) */
+  padding-top: 108px;
+}
+
+@media (min-width: 768px) {
+  body { padding-top: 124px; }
 }
 
 /* ─── 3. Global Keyframe Animations ─────────────────────────── */
@@ -144,7 +150,10 @@ body {
   animation: gradientShift 6s ease infinite;
   padding: 0.6rem 1rem;
   text-align: center;
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   overflow: hidden;
   z-index: 60;
 }
@@ -207,8 +216,10 @@ body {
   backdrop-filter: blur(24px) saturate(180%);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
   border-bottom: 1px solid rgba(0, 101, 118, 0.08);
-  position: sticky;
-  top: 0;
+  position: fixed;
+  top: 36px; /* sits directly below the fixed top bar */
+  left: 0;
+  right: 0;
   z-index: 50;
   transition: box-shadow var(--transition-normal), background-color var(--transition-normal);
 }
@@ -514,9 +525,9 @@ body {
 
 .hero-headline {
   font-family: 'Outfit', sans-serif;
-  font-size: clamp(2.6rem, 5.5vw, 4.5rem);
+  font-size: clamp(2.2rem, 4.2vw, 3.6rem);
   font-weight: 900;
-  line-height: 1.05;
+  line-height: 1.08;
   letter-spacing: -0.03em;
   color: #ffffff;
   margin-bottom: 1.75rem;
@@ -532,7 +543,7 @@ body {
 }
 
 .hero-desc {
-  font-size: 1.05rem;
+  font-size: 0.92rem;
   color: rgba(255,255,255,0.82);
   line-height: 1.85;
   max-width: 34rem;
@@ -577,12 +588,12 @@ body {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.8);
-  border-radius: 1.5rem;
+  border-radius: 1.25rem;
   box-shadow:
     0 32px 80px rgba(0, 0, 0, 0.18),
     0 8px 24px rgba(0, 101, 118, 0.12),
     inset 0 1px 0 rgba(255,255,255,0.9);
-  padding: 2.25rem;
+  padding: 1.5rem;
   animation: scaleIn 0.9s 0.15s cubic-bezier(0.4,0,0.2,1) both;
   position: relative;
   overflow: hidden;
@@ -598,37 +609,37 @@ body {
 }
 
 @media (max-width: 640px) {
-  .hero-appt-card { padding: 1.5rem; }
+  .hero-appt-card { padding: 1rem; }
 }
 
 .hero-appt-card__title {
   font-family: 'Outfit', sans-serif;
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: 800;
   color: #0f172a;
-  margin-bottom: 1.5rem;
-  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
   border-bottom: 1px solid #e2e8f0;
   letter-spacing: -0.01em;
 }
 
 .appt-label {
   display: block;
-  font-size: 0.72rem;
+  font-size: 0.66rem;
   font-weight: 700;
   color: #475569;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.3rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
 .appt-input {
   width: 100%;
-  padding: 0.75rem 1rem;
+  padding: 0.55rem 0.85rem;
   border: 1.5px solid #e2e8f0;
-  border-radius: 0.625rem;
+  border-radius: 0.5rem;
   background: #f8fafc;
-  font-size: 0.875rem;
+  font-size: 0.8rem;
   color: #1e293b;
   font-family: 'Inter', sans-serif;
   outline: none;
@@ -641,20 +652,20 @@ body {
   box-shadow: 0 0 0 4px rgba(0, 101, 118, 0.08);
 }
 
-.appt-field { margin-bottom: 1.1rem; }
+.appt-field { margin-bottom: 0.75rem; }
 
 .btn-appt-submit {
   width: 100%;
-  padding: 0.9rem;
+  padding: 0.65rem;
   background: var(--gradient-brand);
   color: #fff;
   font-family: 'Outfit', sans-serif;
   font-weight: 800;
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   border: none;
-  border-radius: 0.75rem;
+  border-radius: 0.625rem;
   cursor: pointer;
-  margin-top: 0.4rem;
+  margin-top: 0.3rem;
   transition: transform 0.2s, box-shadow 0.2s;
   box-shadow: 0 6px 20px rgba(0, 101, 118, 0.38);
   letter-spacing: 0.02em;
@@ -786,7 +797,7 @@ body {
 /* ─── 16. About Section ───────────────────────────────────────── */
 .about-section {
   background: #fff;
-  padding: 6rem 1.5rem;
+  padding: 6rem 2.5rem;
   overflow: hidden;
   position: relative;
 }
@@ -985,7 +996,7 @@ body {
 /* ─── 17. Services Section ────────────────────────────────── */
 .svc-section {
   background: linear-gradient(160deg, #f0f9fb 0%, #e6f4f7 50%, #f0f9fb 100%);
-  padding: 6rem 1.5rem;
+  padding: 6rem 2.5rem;
   position: relative;
   overflow: hidden;
 }
@@ -1141,20 +1152,15 @@ body {
 .svc-card:hover .svc-icon-wrap {
   box-shadow: 0 10px 28px rgba(0, 101, 118, 0.28);
   transform: scale(1.1) rotate(-4deg);
-  background: var(--gradient-brand);
 }
 
 .svc-icon-wrap svg {
   width: 2.1rem;
   height: 2.1rem;
   color: var(--color-brand);
-  transition: color 0.3s;
+  transition: transform 0.3s;
   position: relative;
   z-index: 1;
-}
-
-.svc-card:hover .svc-icon-wrap svg {
-  color: #ffffff;
 }
 
 .svc-card__title {
@@ -1409,7 +1415,7 @@ body {
 /* ─── 19. Contact Section ────────────────────────────────────── */
 .contact-section {
   background: linear-gradient(160deg, #f8fafc 0%, #f0f9fb 50%, #f8fafc 100%);
-  padding: 6rem 1.25rem;
+  padding: 6rem 2.5rem;
   width: 100%;
   position: relative;
   overflow: hidden;
@@ -1713,7 +1719,7 @@ body {
   z-index: 2;
   max-width: 1240px;
   margin: 0 auto;
-  padding: 0 1.5rem;
+  padding: 0 2.5rem;
 }
 
 .footer-grid {
@@ -1921,7 +1927,7 @@ body {
 .page-hero {
   max-width: 80rem;
   margin-inline: auto;
-  padding-inline: 1.25rem;
+  padding-inline: 2.5rem;
   padding-block: 6rem;
   text-align: center;
 }

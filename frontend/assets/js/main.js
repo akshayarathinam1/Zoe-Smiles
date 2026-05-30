@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   /* ── Inject Booking Modal ── */
   const modalHTML = `
-<div id="booking-modal" class="bk-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="bk-modal-title" style="display:none;">
+<div id="booking-modal" class="bk-modal-overlay bk-hidden" role="dialog" aria-modal="true" aria-labelledby="bk-modal-title" style="display:none;">
   <div class="bk-modal">
     <button class="bk-modal__close" id="bk-modal-close" aria-label="Close booking form">
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
@@ -60,7 +60,6 @@ document.addEventListener("DOMContentLoaded", function() {
     inset: 0;
     z-index: 9999;
     background: rgba(10, 25, 40, 0.72);
-    backdrop-filter: blur(6px);
     display: flex !important;
     align-items: center;
     justify-content: center;
@@ -381,8 +380,9 @@ document.addEventListener("DOMContentLoaded", function() {
       <div class="footer-col reveal reveal-delay-3" id="footer-col-4">
         <h4 class="footer-title">Contact Us</h4>
         <p class="footer-contact-text">
-          123 Dental Plaza, Health Avenue<br>
-          Medical District, NY 10001
+          Anderson School Campus,<br>
+          Opp. Govt. ITI, Yercaud Main Road,<br>
+          Salem - 636007
         </p>
         <p class="footer-contact-text" style="margin-top: 1rem;">
           <strong>Phone:</strong> (555) 0123-4567<br>
