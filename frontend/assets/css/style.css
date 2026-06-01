@@ -1117,6 +1117,37 @@ body {
   .svc-grid { grid-template-columns: 1fr; }
 }
 
+/* ── Center last card when alone on its row ── */
+/* 4-col (≥1025px): place in cols 2–3 so it sits centred */
+.svc-grid .svc-card:last-child {
+  grid-column: 2 / 4;
+}
+
+/* 3-col (≤1024px): place in the middle column */
+@media (max-width: 1024px) {
+  .svc-grid .svc-card:last-child {
+    grid-column: 2 / 3;
+  }
+}
+
+/* 2-col (≤760px): span full row width, then limit & auto-centre */
+@media (max-width: 760px) {
+  .svc-grid .svc-card:last-child {
+    grid-column: 1 / -1;
+    max-width: calc(50% - 0.75rem);
+    margin-inline: auto;
+  }
+}
+
+/* 1-col (≤480px): full width, no special treatment needed */
+@media (max-width: 480px) {
+  .svc-grid .svc-card:last-child {
+    grid-column: 1;
+    max-width: 100%;
+    margin-inline: 0;
+  }
+}
+
 .svc-card {
   display: flex;
   flex-direction: column;
