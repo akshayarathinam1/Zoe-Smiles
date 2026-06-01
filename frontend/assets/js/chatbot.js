@@ -1,27 +1,10 @@
-document.addEventListener("DOMContentLoaded", async function () {
+document.addEventListener("DOMContentLoaded", function () {
   // ===== State & Configuration =====
   const state = {
     isOpen: false,
     hasWelcomed: false,
-    kb: null, // Knowledge base loaded from kb.json
-    sarvamConfig: {
-      endpoint: "https://api.sarvam.ai/chat/completions",
-      apiKey: "" // Configure API key here for live Sarvam AI
-    }
+    apiUrl: "http://localhost:3001/api/chat" // Change to production URL when deploying
   };
-
-  // ===== Load Knowledge Base =====
-  try {
-    const response = await fetch("assets/js/kb.json");
-    if (response.ok) {
-      state.kb = await response.json();
-      console.log("Zoe AI Knowledge Base Loaded Successfully");
-    } else {
-      console.error("Failed to load Knowledge Base");
-    }
-  } catch (error) {
-    console.error("Error loading Knowledge Base:", error);
-  }
 
   // ===== Inject Chatbot UI =====
   const chatbotContainer = document.createElement('div');
@@ -52,12 +35,6 @@ document.addEventListener("DOMContentLoaded", async function () {
           </svg>
         </button>
       </div>
-      
-      <!-- AI Branding Strip -->
-      <div class="chatbot-ai-strip">
-        <div class="chatbot-ai-strip__dot"></div>
-        <div class="chatbot-ai-strip__text">Powered by Sarvam AI Engine</div>
-      </div>
 
       <!-- Chat Body -->
       <div id="chatbot-body" class="chatbot-body">
@@ -77,11 +54,11 @@ document.addEventListener("DOMContentLoaded", async function () {
   document.body.appendChild(chatbotContainer);
 
   const chatbotToggleBtn = document.getElementById('chatbot-toggle-btn');
-  const chatbotWidget = document.getElementById('chatbot-widget');
-  const chatbotCloseBtn = document.getElementById('chatbot-close-btn');
-  const chatbotBody = document.getElementById('chatbot-body');
-  const chatbotInput = document.getElementById('chatbot-input');
-  const chatbotSendBtn = document.getElementById('chatbot-send-btn');
+  const chatbotWidget    = document.getElementById('chatbot-widget');
+  const chatbotCloseBtn  = document.getElementById('chatbot-close-btn');
+  const chatbotBody      = document.getElementById('chatbot-body');
+  const chatbotInput     = document.getElementById('chatbot-input');
+  const chatbotSendBtn   = document.getElementById('chatbot-send-btn');
 
   // ===== UI Interactions =====
   chatbotToggleBtn.addEventListener('click', () => {
@@ -89,7 +66,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     chatbotWidget.classList.toggle('chatbot-widget--open', state.isOpen);
     if (state.isOpen) {
       setTimeout(() => chatbotInput.focus(), 300);
-      
+
       // Dynamic welcome message on first open
       if (!state.hasWelcomed) {
         state.hasWelcomed = true;
@@ -125,13 +102,12 @@ document.addEventListener("DOMContentLoaded", async function () {
   function appendMessage(text, isUser = false) {
     const msgDiv = document.createElement('div');
     msgDiv.className = `chat-message ${isUser ? 'user' : 'bot'}`;
-    
+
     if (!isUser) {
       msgDiv.innerHTML = `
         <span class="chat-sender">Zoe AI</span>
         <div class="chat-bubble"></div>
       `;
-      // Use textContent to prevent XSS and handle newlines via CSS white-space
       msgDiv.querySelector('.chat-bubble').textContent = text;
     } else {
       msgDiv.innerHTML = `<div class="chat-bubble"></div>`;
@@ -162,74 +138,35 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
   }
 
-  // ===== AI / NLP Engine =====
-  
-  // Fuzzy matching against Knowledge Base
-  function getResponseFromKB(query) {
-    if (!state.kb) return "I'm sorry, I am currently unable to access my knowledge base. Please call us at +91 (555) 0123-4567.";
-    
-    const lowerQuery = query.toLowerCase();
-    
-    // Check quick intents
-    if (lowerQuery.includes("hi") || lowerQuery.includes("hello") || lowerQuery.includes("hey")) {
-      return "Hello! How can I help you today? You can ask me about our services, clinic hours, or how to book an appointment.";
-    }
-
-    if (lowerQuery.includes("hour") || lowerQuery.includes("time") || lowerQuery.includes("open")) {
-      const hours = state.kb.clinic.hours;
-      return `Our clinic hours are:\nMon-Fri: ${hours.monday_friday}\nSaturday: ${hours.saturday}\nSunday: ${hours.sunday}`;
-    }
-
-    if (lowerQuery.includes("contact") || lowerQuery.includes("call") || lowerQuery.includes("phone")) {
-      return `You can reach us at ${state.kb.clinic.phone} or email us at ${state.kb.clinic.email}. We are located at ${state.kb.clinic.address}.`;
-    }
-    
-    if (lowerQuery.includes("location") || lowerQuery.includes("address") || lowerQuery.includes("where")) {
-      return `We are located at ${state.kb.clinic.address}. You can find a map on our Contact page.`;
-    }
-
-    // Search FAQs
-    for (const faq of state.kb.faqs) {
-      if (faq.keywords.some(kw => lowerQuery.includes(kw))) {
-        return faq.answer;
-      }
-    }
-
-    // Search Services
-    for (const service of state.kb.services) {
-      if (service.keywords.some(kw => lowerQuery.includes(kw))) {
-        return `We offer ${service.name}. ${service.detail}\nDuration: ${service.duration}.`;
-      }
-    }
-
-    // Default Fallback
-    return "Thank you for your message! Our clinical team will get back to you shortly, or you can call us directly at " + state.kb.clinic.phone + " for immediate assistance.";
-  }
-
+  // ===== Backend API Integration =====
   async function handleSend() {
     const query = chatbotInput.value.trim();
     if (!query) return;
 
-    appendMessage(query, true);
+    appendMessage(query, true);  // show user message
     chatbotInput.value = '';
-    
+
     const typingDiv = showTyping();
 
-    // Simulate network delay for natural feel
-    setTimeout(() => {
+    try {
+      const response = await fetch(state.apiUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: query })
+      });
+
+      const data = await response.json();
       removeTyping(typingDiv);
-      
-      // If an API key is provided, we would call Sarvam here. 
-      // Since we don't have one loaded by default, we use the local Knowledge Base intent engine.
-      if (state.sarvamConfig.apiKey) {
-        // Placeholder for live Sarvam API integration
-        appendMessage("Sarvam API endpoint configured. (API implementation goes here).");
+
+      if (response.ok) {
+        appendMessage(data.reply);
       } else {
-        // Fallback to Rule-based intent matching over JSON
-        const responseText = getResponseFromKB(query);
-        appendMessage(responseText);
+        appendMessage(data.reply || "Sorry, I'm having trouble right now. Please call us at +91 (555) 0123-4567.");
       }
-    }, 800 + Math.random() * 500);
+    } catch (err) {
+      removeTyping(typingDiv);
+      appendMessage("Unable to connect to the server. Please call us at +91 (555) 0123-4567.");
+    }
   }
 
   chatbotSendBtn.addEventListener('click', handleSend);
