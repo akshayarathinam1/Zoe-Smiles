@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const state = {
     isOpen: false,
     hasWelcomed: false,
-    apiUrl: "http://localhost:3001/api/chat" // Change to production URL when deploying
+    apiUrl: "https://yellowgreen-kangaroo-728704.hostingersite.com/api/chat" // Production URL
   };
 
   // ===== Inject Chatbot UI =====
@@ -23,9 +23,11 @@ document.addEventListener("DOMContentLoaded", function () {
       <!-- Header -->
       <div class="chatbot-header">
         <div class="chatbot-header-info">
-          <div class="chatbot-avatar">Z</div>
+          <div class="chatbot-avatar" style="overflow: hidden; background: #fff;">
+            <img src="assets/logo/logo_zoesmiles.png" alt="Zoe Smiles" style="width: 100%; height: 100%; object-fit: contain; padding: 2px;" />
+          </div>
           <div class="chatbot-header-text">
-            <h4>Zoe Assistant</h4>
+            <h4>Zoe Smiles</h4>
             <span>Online</span>
           </div>
         </div>
@@ -161,11 +163,11 @@ document.addEventListener("DOMContentLoaded", function () {
       if (response.ok) {
         appendMessage(data.reply);
       } else {
-        appendMessage(data.reply || "Sorry, I'm having trouble right now. Please call us at +91 (555) 0123-4567.");
+        appendMessage(data.reply || "Sorry, I'm having trouble right now. Please call us at +91 98765 43210.");
       }
     } catch (err) {
       removeTyping(typingDiv);
-      appendMessage("Unable to connect to the server. Please call us at +91 (555) 0123-4567.");
+      appendMessage("Unable to connect to the server. Please call us at +91 98765 43210.");
     }
   }
 
