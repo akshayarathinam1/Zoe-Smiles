@@ -398,7 +398,7 @@ document.addEventListener("DOMContentLoaded", function() {
         &copy; 2026 Zoe Smiles. All rights reserved.
       </div>
       <div class="footer-bottom-links" style="font-size: 0.78rem; color: #ffffff; opacity: 0.8;">
-        Designed by <a href="https://modominds.com/" target="_blank" rel="noopener noreferrer" style="color: #ffffff; font-weight: 600; text-decoration: underline;">Modominds</a>
+        Designed by <a href="https://modominds.com/" target="_blank" rel="noopener noreferrer" style="color: #ffffff; font-weight: 600; text-decoration: underline;">Modo Minds</a>
       </div>
     </div>
   </div>
