@@ -3,20 +3,14 @@
     "name": "Zoe Smiles Multispeciality Dental Clinic",
     "tagline": "Precision Care for Your Perfect Smile",
     "address": "Anderson School Campus, Opp. Govt. ITI, Yercaud Main Road, Salem - 636007",
-    "phone": "+91 (555) 0123-4567",
-    "whatsapp": "+91 (555) 0123-4567",
-    "email": "care@zoesmiles.com",
+    "phone": "+91 9566588362",
+    "whatsapp": "+91 9566588362",
+    "email": "zoesmiles08@gmail.com",
     "website": "https://zoesmiles.com",
     "hours": {
-      "monday_friday": "8:00 AM – 7:00 PM",
-      "saturday": "9:00 AM – 4:00 PM",
-      "sunday": "Closed (Emergency on-call available)"
-    },
-    "languages": ["English", "Tamil", "Hindi"],
-    "established": "2010",
-    "experience_years": "15+",
-    "patients_served": "10,000+",
-    "description": "Zoe Smiles Multispeciality Dental Clinic is a premium dental care centre in Salem, offering advanced dental treatments with a patient-first approach. We combine cutting-edge technology with compassionate care to create healthy, confident smiles."
+      "morning": "10:00 AM – 2:00 PM",
+      "evening": "5:00 PM – 8:00 PM"
+    }
   },
 
   "services": [
@@ -144,7 +138,7 @@
       "id": "booking",
       "question": "How do I book an appointment?",
       "keywords": ["book", "appointment", "schedule", "consultation", "visit", "when can i come", "see doctor", "reserve"],
-      "answer": "You can book an appointment in 3 easy ways:\n1️⃣ Fill the booking form right here on our website (homepage or contact page)\n2️⃣ Call us at +91 (555) 0123-4567\n3️⃣ WhatsApp us at +91 (555) 0123-4567\n\nWe're open Mon–Fri 8AM–7PM and Saturday 9AM–4PM."
+      "answer": "You can book an appointment in 3 easy ways:\n1️⃣ Fill the booking form right here on our website (homepage or contact page)\n2️⃣ Call us at +91 9566588362\n3️⃣ WhatsApp us at +91 9566588362\n\nMorning: 10:00 AM – 2:00 PM | Evening: 5:00 PM – 8:00 PM"
     },
     {
       "id": "first_visit",
@@ -162,19 +156,19 @@
       "id": "insurance",
       "question": "Do you accept insurance?",
       "keywords": ["insurance", "coverage", "cashless", "health card", "medical insurance", "claim"],
-      "answer": "We accept most major dental insurance plans and health cards. Please bring your insurance card on your first visit and we'll verify your coverage.\n\nFor specific insurance queries, please call us at +91 (555) 0123-4567 or email care@zoesmiles.com — our billing team will be happy to help."
+      "answer": "We accept most major dental insurance plans and health cards. Please bring your insurance card on your first visit and we'll verify your coverage.\n\nFor specific insurance queries, please call us at +91 9566588362 or email zoesmiles08@gmail.com — our billing team will be happy to help."
     },
     {
       "id": "cost",
       "question": "How much do treatments cost?",
       "keywords": ["cost", "price", "fees", "charges", "how much", "rate", "pricing", "expensive", "affordable"],
-      "answer": "Treatment costs vary depending on the specific procedure and your individual needs. We believe in transparent pricing — you'll always receive a detailed cost estimate before any treatment begins.\n\nWe also offer flexible EMI payment options for major treatments. For a specific quote, please call us at +91 (555) 0123-4567 or book a free consultation!"
+      "answer": "Treatment costs vary depending on the specific procedure and your individual needs. We believe in transparent pricing — you'll always receive a detailed cost estimate before any treatment begins.\n\nWe also offer flexible EMI payment options for major treatments. For a specific quote, please call us at +91 9566588362 or book a free consultation!"
     },
     {
       "id": "emergency",
       "question": "Do you handle dental emergencies?",
       "keywords": ["emergency", "urgent", "broken tooth", "tooth fell out", "severe pain", "accident", "urgent care"],
-      "answer": "Yes! We provide emergency dental care for urgent situations.\n\n🚨 For immediate assistance, call: +91 (555) 0123-4567\n\nEmergencies we handle:\n• Severe tooth pain\n• Broken or knocked-out teeth\n• Dental trauma from accidents\n• Swelling or abscess\n\nDuring clinic hours we prioritise emergencies. After hours, an on-call dentist is available for true emergencies."
+      "answer": "Yes! We provide emergency dental care for urgent situations.\n\n🚨 For immediate assistance, call: +91 9566588362\n\nEmergencies we handle:\n• Severe tooth pain\n• Broken or knocked-out teeth\n• Dental trauma from accidents\n• Swelling or abscess\n\nDuring clinic hours we prioritise emergencies. After hours, an on-call dentist is available for true emergencies."
     },
     {
       "id": "kids",
@@ -192,7 +186,7 @@
       "id": "parking",
       "question": "Is parking available?",
       "keywords": ["parking", "park", "car", "vehicle", "transport", "how to reach", "directions"],
-      "answer": "Yes, parking is available at our clinic.\n\n📍 Address: Anderson School Campus, Opp. Govt. ITI, Yercaud Main Road, Salem - 636007\n\n📞 Need directions? Call us at +91 (555) 0123-4567 and we'll guide you!"
+      "answer": "Yes, parking is available at our clinic.\n\n📍 Address: Anderson School Campus, Opp. Govt. ITI, Yercaud Main Road, Salem - 636007\n\n📞 Need directions? Call us at +91 9566588362 and we'll guide you!"
     },
     {
       "id": "xray",
@@ -202,5 +196,5 @@
     }
   ],
 
-  "system_prompt": "You are Zoe Assistant, the friendly and professional AI receptionist for Zoe Smiles Multispeciality Dental Clinic in Salem, India. Your role is to answer patient questions about the clinic — services, timings, location, doctors, and general dental information. You are warm, helpful, and professional. Always respond in the same language the patient uses (Tamil, English, or mixed Tanglish). Keep responses concise and friendly. If asked about topics outside your knowledge base, always direct patients to call +91 (555) 0123-4567 or visit the clinic. Never provide specific medical advice or diagnoses — always recommend a consultation for medical questions. Never make up information not in your knowledge base."
+  "system_prompt": "You are Zoe Assistant, the friendly and professional AI receptionist for Zoe Smiles Multispeciality Dental Clinic in Salem, India. Your role is to answer patient questions about the clinic — services, timings, location, doctors, and general dental information. You are warm, helpful, and professional. Always respond in the same language the patient uses (Tamil, English, or mixed Tanglish). Keep responses concise and friendly. If asked about topics outside your knowledge base, always direct patients to call +91 9566588362 or visit the clinic. Never provide specific medical advice or diagnoses — always recommend a consultation for medical questions. Never make up information not in your knowledge base."
 }

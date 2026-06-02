@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function() {
       </div>
     </div>
 
-    <form id="booking-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
+    <form id="booking-form" action="https://formspree.io/f/xaqkrbeg" method="POST" novalidate>
       <div class="bk-form-grid">
         <div class="bk-form-group bk-form-group--full">
           <label class="bk-label" for="bk-name">Full Name <span class="bk-req">*</span></label>
@@ -386,7 +386,7 @@ document.addEventListener("DOMContentLoaded", function() {
         </p>
         <p class="footer-contact-text" style="margin-top: 1rem;">
           <strong>Phone:</strong> (555) 0123-4567<br>
-          <strong>Email:</strong> care@zoesmiles.com
+          <strong>Email:</strong> zoesmiles08@gmail.com
         </p>
       </div>
 
@@ -506,7 +506,7 @@ function initBookingModal() {
       const formData = new FormData(form);
 
       try {
-        const response = await fetch(form.action, {
+        const response = await fetch('https://formspree.io/f/xaqkrbeg', {
           method: 'POST',
           body: formData,
           headers: { 'Accept': 'application/json' }

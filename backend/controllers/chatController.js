@@ -27,7 +27,7 @@ function getResponseFromKB(query) {
 
   if (['hour', 'time', 'open', 'timing', 'schedule'].some(w => lowerQuery.includes(w))) {
     const h = kb.clinic.hours;
-    return `Our clinic hours are:\nMon–Fri: ${h.monday_friday}\nSaturday: ${h.saturday}\nSunday: ${h.sunday}`;
+    return `Our clinic hours are:\n⏰ Morning: ${h.morning}\n⏰ Evening: ${h.evening}`;
   }
 
   if (['contact', 'call', 'phone', 'number'].some(w => lowerQuery.includes(w))) {
