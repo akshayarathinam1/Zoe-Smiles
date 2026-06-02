@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function() {
       <div class="bk-form-footer">
         <p class="bk-privacy">🔒 Your info is safe with us.</p>
         <button type="submit" class="bk-submit" id="bk-submit-btn">
-          <span class="bk-submit__text">Book Now</span>
+          <span class="bk-submit__text">Book a Free Consultation</span>
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/></svg>
         </button>
       </div>
@@ -242,9 +242,8 @@ document.addEventListener("DOMContentLoaded", function() {
   const navbarHTML = `<!-- ===== PREMIUM TOP BAR ===== -->
 <div class="premium-topbar" id="premium-topbar">
   <p class="premium-topbar__text">
-    <span class="premium-topbar__dot"></span>
-    Now accepting new patients &mdash; Book your consultation today!
-    <a href="contact.html#appointment" class="premium-topbar__cta">Book Now &rarr;</a>
+    Now accepting new patients
+    <a href="contact.html#appointment" class="premium-topbar__cta">Book a Free Consultation &rarr;</a>
   </p>
 </div>
 
@@ -385,7 +384,7 @@ document.addEventListener("DOMContentLoaded", function() {
           Salem - 636007
         </p>
         <p class="footer-contact-text" style="margin-top: 1rem;">
-          <strong>Phone:</strong> (555) 0123-4567<br>
+          <strong>Phone:</strong> +91 9566588362<br>
           <strong>Email:</strong> zoesmiles08@gmail.com
         </p>
       </div>
@@ -421,6 +420,7 @@ document.addEventListener("DOMContentLoaded", function() {
     footerRevealEls.forEach(el => footerObserver.observe(el));
   }
   // Chatbot logic has been moved to chatbot.js
+  initFormValidation();
 });
 
 function initBookingModal() {
@@ -484,7 +484,7 @@ function initBookingModal() {
     }
   });
 
-  // Also intercept topbar "Book Now" link (text-content based fallback)
+  // Also intercept topbar "Book a Free Consultation" link (text-content based fallback)
   document.addEventListener('click', (e) => {
     const link = e.target.closest('a');
     if (link && link.href && link.href.includes('contact.html#appointment')) {
@@ -493,38 +493,7 @@ function initBookingModal() {
     }
   });
 
-  // Form submission via Formspree
-  if (form) {
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const btn = document.getElementById('bk-submit-btn');
-      if (btn) {
-        btn.disabled = true;
-        btn.querySelector('.bk-submit__text').textContent = 'Sending…';
-      }
-
-      const formData = new FormData(form);
-
-      try {
-        const response = await fetch('https://formspree.io/f/xaqkrbeg', {
-          method: 'POST',
-          body: formData,
-          headers: { 'Accept': 'application/json' }
-        });
-
-        if (response.ok) {
-          form.style.display = 'none';
-          success.style.display = 'block';
-        } else {
-          if (btn) { btn.disabled = false; btn.querySelector('.bk-submit__text').textContent = 'Confirm Appointment'; }
-          alert('Something went wrong. Please try again or call us directly.');
-        }
-      } catch (err) {
-        if (btn) { btn.disabled = false; btn.querySelector('.bk-submit__text').textContent = 'Confirm Appointment'; }
-        alert('Network error. Please check your connection and try again.');
-      }
-    });
-  }
+  // Form submission and validation is set up globally in initFormValidation()
 }
 
 function initNavbar() {
@@ -582,3 +551,245 @@ function setActiveNavLink() {
     }
   });
 }
+
+/* ─── 25. Centralized Premium Form Validation & Submission ─── */
+function initFormValidation() {
+  // Set minimum dates
+  const dateInputs = document.querySelectorAll('input[type="date"]');
+  const todayStr = new Date().toISOString().split('T')[0];
+  dateInputs.forEach(input => {
+    input.setAttribute('min', todayStr);
+  });
+
+  const dateTimeInputs = document.querySelectorAll('input[type="datetime-local"]');
+  if (dateTimeInputs.length > 0) {
+    const todayDateTime = new Date();
+    const offset = todayDateTime.getTimezoneOffset();
+    const localToday = new Date(todayDateTime.getTime() - (offset * 60 * 1000));
+    const minDateTime = localToday.toISOString().substring(0, 16);
+    dateTimeInputs.forEach(input => {
+      input.setAttribute('min', minDateTime);
+    });
+  }
+
+  // Set up all known forms in the project
+  setupPremiumForm('booking-form', 'bk-submit-btn', '', { isModal: true });
+  setupPremiumForm('hero-appt-form', 'hero-appt-submit', 'Appointment confirmed! We will contact you shortly.');
+  setupPremiumForm('contact-form', 'contact-submit', 'Message sent successfully! We will get back to you soon.');
+  setupPremiumForm('contact-appt-form', 'contact-appt-submit', 'Appointment request sent! We will contact you shortly to confirm.');
+}
+
+function setupPremiumForm(formId, submitBtnId, successMsg, options = {}) {
+  const form = document.getElementById(formId);
+  const submitBtn = document.getElementById(submitBtnId);
+  if (!form) return;
+
+  // Disable browser native validation
+  form.setAttribute('novalidate', 'true');
+
+  const inputs = form.querySelectorAll('input, select, textarea');
+
+  // Real-time validation listeners
+  inputs.forEach(input => {
+    input.addEventListener('blur', () => validateField(input));
+    input.addEventListener('input', () => {
+      if (input.classList.contains('is-invalid')) {
+        validateField(input);
+      }
+    });
+    input.addEventListener('change', () => validateField(input));
+  });
+
+  // Intercept form submission
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // Validate all fields
+    let isFormValid = true;
+    inputs.forEach(input => {
+      if (!validateField(input)) isFormValid = false;
+    });
+
+    if (!isFormValid) {
+      if (typeof showToast === 'function') {
+        showToast('Please correct the highlighted fields.');
+      } else {
+        alert('Please correct the highlighted fields.');
+      }
+      
+      // Auto focus the first invalid field
+      const firstInvalid = form.querySelector('.is-invalid');
+      if (firstInvalid) firstInvalid.focus();
+      return;
+    }
+
+    // Disable button & set sending text
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      if (options.isModal) {
+        const textSpan = submitBtn.querySelector('.bk-submit__text');
+        if (textSpan) textSpan.textContent = 'Sending…';
+      } else {
+        submitBtn.setAttribute('data-original-text', submitBtn.textContent || submitBtn.value || '');
+        if (submitBtn.tagName.toLowerCase() === 'input') {
+          submitBtn.value = 'Sending...';
+        } else {
+          submitBtn.textContent = 'Sending...';
+        }
+      }
+    }
+
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch('https://formspree.io/f/xaqkrbeg', {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (response.ok) {
+        if (options.isModal) {
+          // Immediately close the modal overlay with animations
+          const overlay = document.getElementById('booking-modal');
+          if (overlay) {
+            overlay.classList.add('bk-hidden');
+            setTimeout(() => { overlay.style.display = 'none'; }, 200);
+          }
+          document.body.style.overflow = '';
+
+          // Display success toast message
+          if (typeof showToast === 'function') {
+            showToast('Appointment request sent! We will contact you shortly to confirm.');
+          } else {
+            alert('Appointment request sent! We will contact you shortly to confirm.');
+          }
+        } else {
+          if (typeof showToast === 'function') {
+            showToast(successMsg);
+          } else {
+            alert(successMsg);
+          }
+        }
+        form.reset();
+        // Clear all styles after successful submit
+        inputs.forEach(input => {
+          input.classList.remove('is-valid', 'is-invalid');
+          const errMsg = input.parentElement.querySelector('.error-message');
+          if (errMsg) errMsg.remove();
+        });
+      } else {
+        throw new Error('Form submission failed');
+      }
+    } catch (err) {
+      if (typeof showToast === 'function') {
+        showToast('Oops! There was a problem submitting your request. Please try again.');
+      } else {
+        alert('Oops! There was a problem submitting your request. Please try again.');
+      }
+    } finally {
+      // Re-enable button
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        if (options.isModal) {
+          const textSpan = submitBtn.querySelector('.bk-submit__text');
+          if (textSpan) textSpan.textContent = 'Book a Free Consultation';
+        } else {
+          const origText = submitBtn.getAttribute('data-original-text');
+          if (origText) {
+            if (submitBtn.tagName.toLowerCase() === 'input') {
+              submitBtn.value = origText;
+            } else {
+              submitBtn.textContent = origText;
+            }
+          }
+        }
+      }
+    }
+  });
+}
+
+function validateField(input) {
+  const value = input.value.trim();
+  let isValid = true;
+  let errorMsg = '';
+
+  // Required Field Check
+  if (input.hasAttribute('required') && !value) {
+    isValid = false;
+    errorMsg = 'This field is required.';
+  }
+  // Email Validation Check
+  else if (input.type === 'email' && value) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(value)) {
+      isValid = false;
+      errorMsg = 'Please enter a valid email address.';
+    }
+  }
+  // Phone/Tel Validation Check (Indian mobile number format)
+  else if (input.type === 'tel' && value) {
+    const phoneRegex = /^(?:\+91|0)?[6-9]\d{9}$/;
+    const cleanPhone = value.replace(/[\s\-\(\)]/g, '');
+    if (!phoneRegex.test(cleanPhone)) {
+      isValid = false;
+      errorMsg = 'Please enter a valid 10-digit phone number.';
+    }
+  }
+  // Future/Present Date Checks
+  else if ((input.type === 'date' || input.type === 'datetime-local') && value) {
+    const selectedDate = new Date(value);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    if (input.type === 'date') {
+      selectedDate.setHours(0, 0, 0, 0);
+      if (selectedDate < today) {
+        isValid = false;
+        errorMsg = 'Date cannot be in the past.';
+      }
+    } else {
+      if (selectedDate < new Date()) {
+        isValid = false;
+        errorMsg = 'Time cannot be in the past.';
+      }
+    }
+  }
+  // Length Check for Textarea message
+  else if (input.tagName.toLowerCase() === 'textarea' && value && value.length < 5) {
+    isValid = false;
+    errorMsg = 'Please write a slightly longer message (min 5 characters).';
+  }
+
+  setFieldErrorState(input, isValid, errorMsg);
+  return isValid;
+}
+
+function setFieldErrorState(input, isValid, msg) {
+  const parent = input.parentElement;
+  let errorElement = parent.querySelector('.error-message');
+
+  if (!isValid) {
+    input.classList.remove('is-valid');
+    input.classList.add('is-invalid');
+
+    if (!errorElement) {
+      errorElement = document.createElement('span');
+      errorElement.className = 'error-message';
+      parent.appendChild(errorElement);
+    }
+    errorElement.textContent = msg;
+  } else {
+    input.classList.remove('is-invalid');
+    if (input.value.trim() !== '') {
+      input.classList.add('is-valid');
+    } else {
+      input.classList.remove('is-valid');
+    }
+
+    if (errorElement) {
+      errorElement.remove();
+    }
+  }
+}
+

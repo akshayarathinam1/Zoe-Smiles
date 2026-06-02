@@ -163,11 +163,11 @@ document.addEventListener("DOMContentLoaded", function () {
       if (response.ok) {
         appendMessage(data.reply);
       } else {
-        appendMessage(data.reply || "Sorry, I'm having trouble right now. Please call us at +91 98765 43210.");
+        appendMessage(data.reply || "Sorry, I'm having trouble right now. Please call us at +91 95665 88362.");
       }
     } catch (err) {
       removeTyping(typingDiv);
-      appendMessage("Unable to connect to the server. Please call us at +91 98765 43210.");
+      appendMessage("Unable to connect to the server. Please call us at +91 95665 88362.");
     }
   }
 
