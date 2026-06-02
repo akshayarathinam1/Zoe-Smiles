@@ -35,7 +35,12 @@ const swaggerSpec = swaggerJsdoc(swaggerOptions);
 
 // ── Security & middleware ───────────────────────────
 app.use(helmet({ contentSecurityPolicy: false })); // disable CSP so Swagger UI loads
-app.use(cors({ origin: process.env.CORS_ORIGIN || '*' }));
+app.use(cors({
+  origin: function (origin, callback) {
+    callback(null, true);
+  },
+  credentials: true
+}));
 app.use(express.json());
 
 // ── Swagger UI ──────────────────────────────────────

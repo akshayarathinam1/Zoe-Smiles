@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const state = {
     isOpen: false,
     hasWelcomed: false,
-    apiUrl: "https://yellowgreen-kangaroo-728704.hostingersite.com/api/chat" // Production URL
+    apiUrl: "https://olivedrab-hedgehog-472144.hostingersite.com/api/chat" // Production URL
   };
 
   // ===== Inject Chatbot UI =====
