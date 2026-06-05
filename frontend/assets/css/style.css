@@ -1355,10 +1355,42 @@ body {
   font-size: 1.2rem;
 }
 
-.testi-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
+/* ── Infinite marquee wrapper ── */
+.testi-marquee {
+  overflow: hidden;              /* clip the track — no scrollbar ever shown */
+  width: 100%;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+}
+
+/* ── Scrolling track ── */
+.testi-track {
+  display: flex;
+  gap: 1.5rem;
+  width: max-content;            /* let it grow naturally */
+  animation: testi-scroll 40s linear infinite;
+}
+
+/* Pause on hover */
+.testi-marquee:hover .testi-track {
+  animation-play-state: paused;
+}
+
+@keyframes testi-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); } /* shift exactly one set of cards */
 }
 
 /* Glass card */
@@ -1367,6 +1399,7 @@ body {
   flex-direction: column;
   justify-content: space-between;
   gap: 1.75rem;
+  flex: 0 0 340px;               /* fixed width */
   padding: 2rem;
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.12);
@@ -1445,40 +1478,11 @@ body {
   display: block;
 }
 
-.testi-arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 50px; height: 50px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.08);
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  z-index: 10;
-  opacity: 0;
-}
+/* Hide the old prev/next arrows */
+.testi-arrow { display: none; }
 
-.testi-inner:hover .testi-arrow { opacity: 1; }
-.testi-arrow:hover {
-  background: rgba(255, 255, 255, 0.2);
-  border-color: rgba(255, 255, 255, 0.4);
-  transform: translateY(-50%) scale(1.08);
-}
-
-.testi-arrow svg { width: 22px; height: 22px; }
-.testi-prev { left: -8px; }
-.testi-next { right: -8px; }
-
-@media (max-width: 900px) {
-  .testi-grid { grid-template-columns: repeat(2, 1fr); }
-}
 @media (max-width: 600px) {
-  .testi-grid { grid-template-columns: 1fr; }
+  .testi-card { flex: 0 0 280px; }
   .testi-inner { padding: 60px 20px; }
 }
 
