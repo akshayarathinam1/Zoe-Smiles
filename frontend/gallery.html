@@ -132,7 +132,7 @@
 
       .gallery-breadcrumb__sep { opacity: 0.5; }
 
-      /* ── Filter Tabs ── */
+      /* ── Gallery Section ── */
       .gallery-section {
         padding: 4rem 1.5rem 5rem;
         background: #fff;
@@ -142,42 +142,6 @@
       .gallery-inner {
         max-width: 82rem;
         margin-inline: auto;
-      }
-
-      .gallery-filters {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.5rem;
-        flex-wrap: wrap;
-        margin-bottom: 3rem;
-      }
-
-      .filter-btn {
-        font-family: 'Outfit', sans-serif;
-        font-size: 0.85rem;
-        font-weight: 700;
-        padding: 0.55rem 1.4rem;
-        border-radius: 9999px;
-        border: 2px solid rgba(0,101,118,0.18);
-        background: transparent;
-        color: #475569;
-        cursor: pointer;
-        transition: background 0.22s, color 0.22s, border-color 0.22s, transform 0.18s;
-        letter-spacing: 0.02em;
-      }
-
-      .filter-btn:hover {
-        border-color: var(--color-brand);
-        color: var(--color-brand);
-        transform: translateY(-1px);
-      }
-
-      .filter-btn.active {
-        background: var(--gradient-brand);
-        color: #fff;
-        border-color: transparent;
-        box-shadow: var(--shadow-brand);
       }
 
       /* ── Masonry Grid ── */
@@ -559,13 +523,6 @@
       <section class="gallery-section" id="gallery">
         <div class="gallery-inner">
 
-          <!-- Filter Tabs -->
-          <div class="gallery-filters" id="gallery-filters" role="tablist" aria-label="Gallery filter">
-            <button class="filter-btn active" data-filter="all"      id="filter-all"      role="tab" aria-selected="true">All</button>
-            <button class="filter-btn"        data-filter="clinic"   id="filter-clinic"   role="tab" aria-selected="false">Our Clinic</button>
-            <button class="filter-btn"        data-filter="tech"     id="filter-tech"     role="tab" aria-selected="false">Advanced Tech</button>
-            <button class="filter-btn"        data-filter="smiles"   id="filter-smiles"   role="tab" aria-selected="false">Smile Gallery</button>
-          </div>
 
           <!-- Masonry Grid -->
           <div class="gallery-grid" id="gallery-grid">
@@ -592,10 +549,126 @@
               </div>
             </div>
 
+            <!-- Image 3 -->
+            <div class="gallery-item reveal" data-category="smiles" data-label="Patient Smile Transformation" id="gitem-3">
+              <img src="assets/gallery/gallery_image3.jpg" alt="Patient smile transformation at Zoe Smiles" loading="lazy" />
+              <div class="gallery-item__overlay">
+                <span class="gallery-item__label">Patient Smile Transformation</span>
+              </div>
+              <div class="gallery-item__zoom" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607ZM10.5 7.5v6m3-3h-6" /></svg>
+              </div>
+            </div>
+
+            <!-- Image 4 -->
+            <div class="gallery-item reveal" data-category="clinic" data-label="Zoe Smiles Clinic" id="gitem-4">
+              <img src="assets/gallery/gallery_image4.jpeg" alt="Zoe Smiles clinic facilities" loading="lazy" />
+              <div class="gallery-item__overlay">
+                <span class="gallery-item__label">Zoe Smiles Clinic</span>
+              </div>
+              <div class="gallery-item__zoom" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607ZM10.5 7.5v6m3-3h-6" /></svg>
+              </div>
+            </div>
+
           </div><!-- /gallery-grid -->
         </div><!-- /gallery-inner -->
       </section>
       <!-- ===== END GALLERY SECTION ===== -->
+
+      <!-- ===== TESTIMONIALS SECTION ===== -->
+      <section id="testimonials" class="testi-section">
+        <!-- Background overlay -->
+        <div class="testi-overlay"></div>
+
+        <div class="testi-inner relative group">
+          <!-- Heading -->
+          <h2 class="testi-heading">What People Say</h2>
+
+          <!-- Arrows -->
+          <button class="testi-arrow testi-prev" aria-label="Previous">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          <button class="testi-arrow testi-next" aria-label="Next">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+
+          <!-- Infinite scrolling marquee -->
+          <div class="testi-marquee">
+            <div class="testi-track">
+
+              <!-- ── Original set ── -->
+              <div class="testi-card">
+                <p class="testi-quote">One of the best doctors in Salem. Very humble and helpful in nature.</p>
+                <div class="testi-author"><span class="testi-name">Owais Ali</span></div>
+              </div>
+              <div class="testi-card">
+                <p class="testi-quote">When I come into your clinic, I feel as if I'm in the presence of God. I feel more peaceful and safe.</p>
+                <div class="testi-author"><span class="testi-name">Chamundeshwari</span></div>
+              </div>
+              <div class="testi-card">
+                <p class="testi-quote">You changed my husband's life sir. We didn't expect such a transformation in his smile.</p>
+                <div class="testi-author"><span class="testi-name">Shanthi Narendran</span></div>
+              </div>
+              <div class="testi-card">
+                <p class="testi-quote">I have not smiled for a long time in my life because of my forwardly placed teeth. I'm so surprised and happy with my new smile. Thank you so much for this smile sir.</p>
+                <div class="testi-author"><span class="testi-name">Maadhu</span></div>
+              </div>
+              <div class="testi-card">
+                <p class="testi-quote">Thank you doctor for all your efforts. You did the best for me. I'm able to eat well.</p>
+                <div class="testi-author"><span class="testi-name">Manickam</span></div>
+              </div>
+              <div class="testi-card">
+                <p class="testi-quote">They asked me to remove all my teeth and go for dentures. But you took care of my needs and did the best for me retaining the good teeth with utmost care. My smile has changed and now I smile with confidence.</p>
+                <div class="testi-author"><span class="testi-name">Krishnaveni</span></div>
+              </div>
+              <div class="testi-card">
+                <p class="testi-quote">I came with all my front teeth removed. And got my fixed teeth done. I was worried about my smile but when I got my final teeth I was so happy. I now smile all the time with great confidence.</p>
+                <div class="testi-author"><span class="testi-name">Subathradevi</span></div>
+              </div>
+
+              <!-- ── Duplicate set for seamless loop ── -->
+              <div class="testi-card" aria-hidden="true">
+                <p class="testi-quote">One of the best doctors in Salem. Very humble and helpful in nature.</p>
+                <div class="testi-author"><span class="testi-name">Owais Ali</span></div>
+              </div>
+              <div class="testi-card" aria-hidden="true">
+                <p class="testi-quote">When I come into your clinic, I feel as if I'm in the presence of God. I feel more peaceful and safe.</p>
+                <div class="testi-author"><span class="testi-name">Chamundeshwari</span></div>
+              </div>
+              <div class="testi-card" aria-hidden="true">
+                <p class="testi-quote">You changed my husband's life sir. We didn't expect such a transformation in his smile.</p>
+                <div class="testi-author"><span class="testi-name">Shanthi Narendran</span></div>
+              </div>
+              <div class="testi-card" aria-hidden="true">
+                <p class="testi-quote">I have not smiled for a long time in my life because of my forwardly placed teeth. I'm so surprised and happy with my new smile. Thank you so much for this smile sir.</p>
+                <div class="testi-author"><span class="testi-name">Maadhu</span></div>
+              </div>
+              <div class="testi-card" aria-hidden="true">
+                <p class="testi-quote">Thank you doctor for all your efforts. You did the best for me. I'm able to eat well.</p>
+                <div class="testi-author"><span class="testi-name">Manickam</span></div>
+              </div>
+              <div class="testi-card" aria-hidden="true">
+                <p class="testi-quote">They asked me to remove all my teeth and go for dentures. But you took care of my needs and did the best for me retaining the good teeth with utmost care. My smile has changed and now I smile with confidence.</p>
+                <div class="testi-author"><span class="testi-name">Krishnaveni</span></div>
+              </div>
+              <div class="testi-card" aria-hidden="true">
+                <p class="testi-quote">I came with all my front teeth removed. And got my fixed teeth done. I was worried about my smile but when I got my final teeth I was so happy. I now smile all the time with great confidence.</p>
+                <div class="testi-author"><span class="testi-name">Subathradevi</span></div>
+              </div>
+
+            </div><!-- /testi-track -->
+          </div><!-- /testi-marquee -->
+        </div><!-- /testi-inner -->
+      </section>
+      <!-- ===== END TESTIMONIALS SECTION ===== -->
+
+        
+         
 
       <!-- ===== CTA BANNER ===== -->
       <section class="cta-section" id="cta">
@@ -664,32 +737,6 @@
       }, { threshold: 0.1 });
       revealEls.forEach(el => revealObserver.observe(el));
 
-      /* ── Gallery Filter ── */
-      const filterBtns = document.querySelectorAll('.filter-btn');
-      const galleryItems = document.querySelectorAll('.gallery-item');
-
-      filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-          // Update active state
-          filterBtns.forEach(b => {
-            b.classList.remove('active');
-            b.setAttribute('aria-selected', 'false');
-          });
-          btn.classList.add('active');
-          btn.setAttribute('aria-selected', 'true');
-
-          const filter = btn.dataset.filter;
-
-          galleryItems.forEach(item => {
-            const cat = item.dataset.category;
-            if (filter === 'all' || cat === filter) {
-              item.classList.remove('hidden');
-            } else {
-              item.classList.add('hidden');
-            }
-          });
-        });
-      });
 
       /* ── Lightbox ── */
       const lightbox     = document.getElementById('lightbox');
@@ -703,7 +750,7 @@
       let currentIndex = 0;
 
       function getVisibleItems() {
-        return [...document.querySelectorAll('.gallery-item:not(.hidden)')];
+        return [...document.querySelectorAll('.gallery-item')];
       }
 
       function openLightbox(index) {
