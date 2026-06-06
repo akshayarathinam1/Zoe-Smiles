@@ -1355,42 +1355,23 @@ body {
   font-size: 1.2rem;
 }
 
-/* ── Infinite marquee wrapper ── */
+/* ── Slider viewport (clips overflowing cards) ── */
 .testi-marquee {
-  overflow: hidden;              /* clip the track — no scrollbar ever shown */
   width: 100%;
-  -webkit-mask-image: linear-gradient(
-    to right,
-    transparent 0%,
-    black 8%,
-    black 92%,
-    transparent 100%
-  );
-  mask-image: linear-gradient(
-    to right,
-    transparent 0%,
-    black 8%,
-    black 92%,
-    transparent 100%
-  );
+  overflow: hidden;
+  -webkit-mask-image: none;
+  mask-image: none;
 }
 
-/* ── Scrolling track ── */
+/* ── Card track: single row, slides via transform ── */
 .testi-track {
   display: flex;
+  flex-wrap: nowrap;
   gap: 1.5rem;
-  width: max-content;            /* let it grow naturally */
-  animation: testi-scroll 40s linear infinite;
-}
-
-/* Pause on hover */
-.testi-marquee:hover .testi-track {
-  animation-play-state: paused;
-}
-
-@keyframes testi-scroll {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); } /* shift exactly one set of cards */
+  width: 100%;
+  animation: none;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
 }
 
 /* Glass card */
@@ -1399,7 +1380,8 @@ body {
   flex-direction: column;
   justify-content: space-between;
   gap: 1.75rem;
-  flex: 0 0 340px;               /* fixed width */
+  flex: 0 0 calc(33.333% - 1rem);   /* 3 cards visible */
+  min-width: 0;
   padding: 2rem;
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.12);
@@ -1478,12 +1460,86 @@ body {
   display: block;
 }
 
-/* Hide the old prev/next arrows */
-.testi-arrow { display: none; }
+/* ── Slider arrow buttons ── */
+.testi-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+  color: #ffffff;
+  cursor: pointer;
+  z-index: 10;
+  transition: background 0.25s, border-color 0.25s, transform 0.25s;
+}
+
+.testi-arrow svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex-shrink: 0;
+}
+
+.testi-prev {
+  left: 0;
+}
+
+.testi-next {
+  right: 0;
+}
+
+.testi-arrow:hover {
+  background: rgba(0, 101, 118, 0.65);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.testi-arrow:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  transform: translateY(-50%) scale(1);
+}
+
+/* Dots indicator */
+.testi-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+}
+
+.testi-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.3);
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+  padding: 0;
+}
+
+.testi-dot.active {
+  background: #ffffff;
+  transform: scale(1.3);
+}
+
+/* Responsive: 2 cards on tablet, 1 on mobile */
+@media (max-width: 900px) {
+  .testi-card { flex: 0 0 calc(50% - 0.75rem); }
+}
 
 @media (max-width: 600px) {
-  .testi-card { flex: 0 0 280px; }
+  .testi-card { flex: 0 0 100%; }
   .testi-inner { padding: 60px 20px; }
+  .testi-prev { left: -0.5rem; }
+  .testi-next { right: -0.5rem; }
 }
 
 /* ─── 19. Contact Section ────────────────────────────────────── */

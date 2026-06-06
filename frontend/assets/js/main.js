@@ -387,6 +387,10 @@ document.addEventListener("DOMContentLoaded", function() {
           <strong>Phone:</strong> +91 9566588362<br>
           <strong>Email:</strong> zoesmiles08@gmail.com
         </p>
+        <p class="footer-contact-text" style="margin-top: 0.75rem;">
+          <strong>Morning:</strong> 10:00 AM – 2:00 PM<br>
+          <strong>Evening:</strong> 5:00 PM – 8:00 PM
+        </p>
       </div>
 
     </div>

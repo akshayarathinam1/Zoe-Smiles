@@ -516,9 +516,8 @@
             </svg>
           </button>
 
-          <!-- Infinite scrolling marquee -->
           <div class="testi-marquee">
-            <div class="testi-track">
+            <div class="testi-track" id="testi-track">
 
               <!-- ── Original set ── -->
               <div class="testi-card">
@@ -550,38 +549,13 @@
                 <div class="testi-author"><span class="testi-name">Subathradevi</span></div>
               </div>
 
-              <!-- ── Duplicate set for seamless loop ── -->
-              <div class="testi-card" aria-hidden="true">
-                <p class="testi-quote">One of the best doctors in Salem. Very humble and helpful in nature.</p>
-                <div class="testi-author"><span class="testi-name">Owais Ali</span></div>
-              </div>
-              <div class="testi-card" aria-hidden="true">
-                <p class="testi-quote">When I come into your clinic, I feel as if I'm in the presence of God. I feel more peaceful and safe.</p>
-                <div class="testi-author"><span class="testi-name">Chamundeshwari</span></div>
-              </div>
-              <div class="testi-card" aria-hidden="true">
-                <p class="testi-quote">You changed my husband's life sir. We didn't expect such a transformation in his smile.</p>
-                <div class="testi-author"><span class="testi-name">Shanthi Narendran</span></div>
-              </div>
-              <div class="testi-card" aria-hidden="true">
-                <p class="testi-quote">I have not smiled for a long time in my life because of my forwardly placed teeth. I'm so surprised and happy with my new smile. Thank you so much for this smile sir.</p>
-                <div class="testi-author"><span class="testi-name">Maadhu</span></div>
-              </div>
-              <div class="testi-card" aria-hidden="true">
-                <p class="testi-quote">Thank you doctor for all your efforts. You did the best for me. I'm able to eat well.</p>
-                <div class="testi-author"><span class="testi-name">Manickam</span></div>
-              </div>
-              <div class="testi-card" aria-hidden="true">
-                <p class="testi-quote">They asked me to remove all my teeth and go for dentures. But you took care of my needs and did the best for me retaining the good teeth with utmost care. My smile has changed and now I smile with confidence.</p>
-                <div class="testi-author"><span class="testi-name">Krishnaveni</span></div>
-              </div>
-              <div class="testi-card" aria-hidden="true">
-                <p class="testi-quote">I came with all my front teeth removed. And got my fixed teeth done. I was worried about my smile but when I got my final teeth I was so happy. I now smile all the time with great confidence.</p>
-                <div class="testi-author"><span class="testi-name">Subathradevi</span></div>
-              </div>
 
             </div><!-- /testi-track -->
           </div><!-- /testi-marquee -->
+
+          <!-- Dot indicators -->
+          <div class="testi-dots" id="testi-dots"></div>
+
         </div><!-- /testi-inner -->
       </section>
 
@@ -733,6 +707,90 @@
         });
       }, { threshold: 0.12 });
       revealEls.forEach(el => revealObserver.observe(el));
+
+      /* ── Testimonials Slider ── */
+      (function () {
+        const track    = document.getElementById('testi-track');
+        const dotsWrap = document.getElementById('testi-dots');
+        const prevBtn  = document.querySelector('.testi-prev');
+        const nextBtn  = document.querySelector('.testi-next');
+        if (!track || !prevBtn || !nextBtn) return;
+
+        const cards       = Array.from(track.querySelectorAll('.testi-card'));
+        let perView       = 3;   // updated by getPerView()
+        let currentIndex  = 0;
+
+        function getPerView() {
+          if (window.innerWidth <= 600)  return 1;
+          if (window.innerWidth <= 900)  return 2;
+          return 3;
+        }
+
+        function maxIndex() {
+          return Math.max(0, cards.length - perView);
+        }
+
+        function slide() {
+          // Width of one card including its gap
+          const gap      = parseFloat(getComputedStyle(track).gap) || 24;
+          const cardWidth = track.querySelector('.testi-card').getBoundingClientRect().width;
+          const offset   = currentIndex * (cardWidth + gap);
+          track.style.transform = `translateX(-${offset}px)`;
+
+          // Button states
+          prevBtn.disabled = currentIndex === 0;
+          nextBtn.disabled = currentIndex >= maxIndex();
+
+          // Dot states
+          document.querySelectorAll('.testi-dot').forEach((d, i) => {
+            d.classList.toggle('active', i === currentIndex);
+          });
+        }
+
+        function buildDots() {
+          dotsWrap.innerHTML = '';
+          const total = maxIndex() + 1;
+          for (let i = 0; i < total; i++) {
+            const btn = document.createElement('button');
+            btn.className = 'testi-dot' + (i === 0 ? ' active' : '');
+            btn.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+            btn.addEventListener('click', () => { currentIndex = i; slide(); });
+            dotsWrap.appendChild(btn);
+          }
+        }
+
+        function init() {
+          perView = getPerView();
+          currentIndex = Math.min(currentIndex, maxIndex());
+          buildDots();
+          slide();
+        }
+
+        prevBtn.addEventListener('click', () => {
+          if (currentIndex > 0) { currentIndex--; slide(); }
+        });
+        nextBtn.addEventListener('click', () => {
+          if (currentIndex < maxIndex()) { currentIndex++; slide(); }
+        });
+
+        // Auto-advance every 5 s
+        let autoTimer = setInterval(() => {
+          currentIndex = currentIndex < maxIndex() ? currentIndex + 1 : 0;
+          slide();
+        }, 5000);
+
+        // Pause on hover
+        track.closest('.testi-section').addEventListener('mouseenter', () => clearInterval(autoTimer));
+        track.closest('.testi-section').addEventListener('mouseleave', () => {
+          autoTimer = setInterval(() => {
+            currentIndex = currentIndex < maxIndex() ? currentIndex + 1 : 0;
+            slide();
+          }, 5000);
+        });
+
+        window.addEventListener('resize', init);
+        init();
+      })();
 
       /* NOTE: Navbar scroll-shadow is handled by main.js → initNavbar() */
     </script>
